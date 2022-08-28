@@ -14,7 +14,10 @@ public class test
         float[][] matrix=new float[rows][columns];
         matrix_operation matrix_operation=new matrix_operation(rows,columns);
         matrix_operation.input_matix_all(matrix);
-        System.out.println(matrix_operation.check_row_echelon_matrix(matrix));
+
+        System.out.println("REM : "+matrix_operation.check_row_echelon_matrix(matrix));
+        System.out.println("RREM : "+matrix_operation.check_reduce_row_echelon_matrix(matrix));
+        
     }
 }
 
@@ -60,10 +63,10 @@ class matrix_operation{
     int leading_coefficient(float[][]matrix,int rows){//return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
         for(int i=0;i<columns;i++){
             if(matrix[rows-1][i]==1){
-                return i;
+                return i+1;
             }
             else if(matrix[rows-1][i]==0){}
-            else{return -1;}
+            else {return -1;}
         }        
         return -1;
     }
@@ -78,25 +81,31 @@ class matrix_operation{
                 if(m_o.leading_coefficient(matrix,i-1)<m_o.leading_coefficient(matrix,i)){}//matrix ตัวก่อนหน้า ตัวนำ 1 ต้องเยื่องไปข้างหน้ากว่าตัวปัจจุบัน) 
                 else if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.row_is_zero(matrix,i)){}//matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
                 else if(m_o.row_is_zero(matrix,i-1)&&m_o.row_is_zero(matrix,i)){}///matrix ตัวก่อนหน้าต้องป็น 0 ทั้งแถวและ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
-                else return false;
+                else {return false;}
             }
-            return false;
-            
+            else {return false;}                        
         }
         return true;
     }
 
-    /* 
+    
     boolean check_reduce_row_echelon_matrix(float[][] matrix){
         matrix_operation m_o=new matrix_operation(rows,columns);
-        m_o.check_reduce_row_echelon_matrix(matrix);
-        if(int i=1;i<=rows;i++){
-            if(m_o.leading_coefficient(matrix,i)!=-1){
-                for(int l=1;l<=)
+        if(m_o.check_row_echelon_matrix(matrix)){
+            for(int i=1;i<=rows;i++){
+                if(m_o.leading_coefficient(matrix,i)!=-1){
+                    for(int l=1;l<=rows;l++){
+                        if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}
+                        else if(l==i){}
+                        else return false;
+                    }
+                }
             }
+            return true;
         }
+        return false;
     }
-    */
+    
 
 
 
