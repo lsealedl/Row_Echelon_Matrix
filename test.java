@@ -33,10 +33,6 @@ class matrix_operation{
     matrix_operation(int rows,int columns){//กำหนดจำนวนแถวและหลัก
         this.rows=rows;
         this.columns=columns;
-    
-    void input_matix(float[][]matrix,int rows,int columns,float value){//ไม่ได้ใช้
-        matrix[rows][columns]=value;
-    }
     }  
     
     void input_matix_all(float[][]matrix){//ใส่ค่าให้ matrix เฉยๆ
