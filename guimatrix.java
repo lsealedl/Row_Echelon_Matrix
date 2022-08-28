@@ -66,7 +66,7 @@ class createtable{
         System.out.print("Martrix "+r+" * "+c+" Created");
     }
     
-}
+}///////
 }
 
 
