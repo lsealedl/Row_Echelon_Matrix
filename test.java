@@ -86,6 +86,7 @@ class matrix_operation{
         return true;
     }
 
+    /* 
     boolean check_reduce_row_echelon_matrix(float[][] matrix){
         matrix_operation m_o=new matrix_operation(rows,columns);
         m_o.check_reduce_row_echelon_matrix(matrix);
@@ -95,6 +96,7 @@ class matrix_operation{
             }
         }
     }
+    */
 
 
 
