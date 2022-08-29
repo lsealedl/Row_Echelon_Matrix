@@ -18,20 +18,24 @@ class input_Mx_size{
     JPanel p = new JPanel();
     p.setLayout(new GridBagLayout());
     JLabel l = new JLabel("Please Input Matrix");
-    GridBagConstraints c = new GridBagConstraints();
-    c.insets=new Insets (15,15,15,15);
-    p.add(l,c);
-    cp.add(p,BorderLayout.NORTH);
-    
-    JPanel p2 = new JPanel();
-    p.setLayout(new GridBagLayout());
-    GridBagConstraints c2 = new GridBagConstraints();
-    c2.insets=new Insets (15,15,15,15);
+    JTextField tf = new JTextField("",4);
+    JTextField tf2 = new JTextField("",4);
     JButton reset_b =new JButton("reset matrix");
-    p2.add(reset_b,c2);
-    cp.add(p2,BorderLayout.SOUTH);
+    l.setHorizontalAlignment(JLabel.CENTER);
+    GridBagConstraints c = new GridBagConstraints();
+    c.insets=new Insets (20,20,20,20);
+    p.add(l,c);
+    c.gridx=0;c.gridy=1;
+    p.add(tf,c);
+    c.gridx=1;c.gridy=1;
+    p.add(tf2,c);
+    c.gridx=0;c.gridy=2;
+    p.add(reset_b,c);
+    cp.add(p);
+    
+    
 
-    f.pack();
+    f.setSize(300,250);
     f.setVisible(true);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setLocationRelativeTo(null);
