@@ -6,12 +6,40 @@ import java.lang.Math;
 public class guimatrix {
     
     public static void main(String[] args) {
-        new gui();
+        new input_Mx_size();
     }
 }
-class  gui
+class input_Mx_size{
+    input_Mx_size(){
+    JFrame f =new JFrame();
+    Container cp = f.getContentPane();
+    cp.setLayout(new BorderLayout());
+     
+    JPanel p = new JPanel();
+    p.setLayout(new GridBagLayout());
+    JLabel l = new JLabel("Please Input Matrix");
+    GridBagConstraints c = new GridBagConstraints();
+    c.insets=new Insets (15,15,15,15);
+    p.add(l,c);
+    cp.add(p,BorderLayout.NORTH);
+    
+    JPanel p2 = new JPanel();
+    p.setLayout(new GridBagLayout());
+    GridBagConstraints c2 = new GridBagConstraints();
+    c2.insets=new Insets (15,15,15,15);
+    JButton reset_b =new JButton("reset matrix");
+    p2.add(reset_b,c2);
+    cp.add(p2,BorderLayout.SOUTH);
+
+    f.pack();
+    f.setVisible(true);
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    f.setLocationRelativeTo(null);
+    }
+}
+class  matrix
 {   
-    gui(){
+    matrix(){
     JFrame f =new JFrame();
     Container cp = f.getContentPane();
     cp.setLayout(new BorderLayout());
@@ -22,7 +50,7 @@ class  gui
     for(int i=0;i<100;i++){
         jc[i]=new JTextField("",3);
     } 
-    cp.add(p);
+    cp.add(p,BorderLayout.NORTH);
     
     GridBagConstraints c = new GridBagConstraints();
     c.insets=new Insets (15,15,15,15);
@@ -34,13 +62,20 @@ class  gui
             n++;
         }
     }
+    JPanel p2 = new JPanel();
+    p2.setLayout(new GridBagLayout());
+    JButton reset_b =new JButton("reset matrix");
+    GridBagConstraints c2 = new GridBagConstraints();
+    c2.insets=new Insets (40,40,40,40);
+    p2.add(reset_b,c2);
+    cp.add(p2,BorderLayout.SOUTH);
     
-    f.add(p);
-    //f.setSize(500,500);
+    f.add(p);  
+    f.setSize(700,700);
     f.setVisible(true);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setLocationRelativeTo(null);
-    f.pack();
+    
     }
 }
 class createtable{
