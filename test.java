@@ -44,10 +44,19 @@ class matrix_operation{
         }
     }
 
-    boolean row_is_zero(float[][]matrix,int rows){//return ว่าแถวเป็น 0 ทั้งแถวหรือเปล่า
+    void print_matrix(float[][] matrix){
+        for(int i=0;i<rows;i++){
+            for(int l=0;l<columns;l++){
+                System.out.print(matrix[i][l]+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    boolean row_is_zero(float[][]matrix,int row){//return ว่าแถวเป็น 0 ทั้งแถวหรือเปล่า
         boolean row_is_zero=true;
         for(int i=0;i<columns;i++){
-            if(matrix[rows-1][i]==0){}
+            if(matrix[row-1][i]==0){}
             else{row_is_zero=false;}
         }
         if(row_is_zero==true){
@@ -56,12 +65,12 @@ class matrix_operation{
         else{return false;}
     }
 
-    int leading_coefficient(float[][]matrix,int rows){//return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
+    int leading_coefficient(float[][]matrix,int row){//return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
         for(int i=0;i<columns;i++){
-            if(matrix[rows-1][i]==1){
+            if(matrix[row-1][i]==1){
                 return i+1;
             }
-            else if(matrix[rows-1][i]==0){}
+            else if(matrix[row-1][i]==0){}
             else {return -1;}
         }        
         return -1;
@@ -85,14 +94,14 @@ class matrix_operation{
     }
 
     
-    boolean check_reduce_row_echelon_matrix(float[][] matrix){
+    boolean check_reduce_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น reduce row echelon matrix เปล่า
         matrix_operation m_o=new matrix_operation(rows,columns);
-        if(m_o.check_row_echelon_matrix(matrix)){
+        if(m_o.check_row_echelon_matrix(matrix)){//เช็คว่าเป็น rem เปล่าถ้าไม่เป็นก็ไม่มีทางเป็น rrem ได้
             for(int i=1;i<=rows;i++){
-                if(m_o.leading_coefficient(matrix,i)!=-1){
+                if(m_o.leading_coefficient(matrix,i)!=-1){//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
                     for(int l=1;l<=rows;l++){
-                        if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}
-                        else if(l==i){}
+                        if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น
+                        else if(l==i){}//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
                         else return false;
                     }
                 }
@@ -102,7 +111,32 @@ class matrix_operation{
         return false;
     }
 
-/////
+    void multiplying_row_by_constant(float[][] matrix,int row,float constant){
+        if(constant==0){
+            return;
+        }
+        else{for(int i=0;i<columns;i++){
+            matrix[row-1][i]=matrix[row-1][i]*constant;
+        }}
+    }
+
+    void adding_row_by_row(float[][] matrix,int row_1,int row_2,int constant){//row_1 คือตัวตั้ง row_2 คือตัวบวก
+        if(constant==0){
+            return;
+        }
+        else{for(int i=0;i<columns;i++){
+            matrix[row_1-1][i]=matrix[row_1-1][i]+(matrix[row_2-1][i]*constant);
+        }}
+    }
+
+    void switching_two_rows(float[][] matrix,int row_1,int row_2){//สลับแถว
+        for(int i=0;i<columns;i++){
+            float tmp=matrix[row_1-1][i];
+            matrix[row_1-1][i]=matrix[row_2-1][i];
+            matrix[row_2-1][i]=tmp;
+        }
+    }
+
 
 
 }
