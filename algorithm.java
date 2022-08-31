@@ -1,5 +1,5 @@
 import java.util.*;
-public class test
+public class algorithm
 {
     public static void main(String[] arngs)
     {   
@@ -17,6 +17,8 @@ public class test
 
         System.out.println("REM : "+matrix_operation.check_row_echelon_matrix(matrix));
         System.out.println("RREM : "+matrix_operation.check_reduce_row_echelon_matrix(matrix));
+        //matrix_operation.rem(matrix);
+        matrix_operation.print_matrix(matrix);
         
     }
 }
@@ -83,12 +85,20 @@ class matrix_operation{
             else return false;}
         for(int i=2;i<=rows;i++){
             if((m_o.leading_coefficient(matrix,i-1)!=-1||m_o.row_is_zero(matrix,i-1))&&(m_o.leading_coefficient(matrix,i)!=-1||m_o.row_is_zero(matrix,i))){//ถ้า (matrix ตัวก่อนหน้ามีตัวนำ 1 หรือเป็น 0 ทั้งแถว) และ (matrix ตัวปัจจุบันมีตัวนำ 1 หรือเป็น 0 ทั้งแถว)
-                if(m_o.leading_coefficient(matrix,i-1)<m_o.leading_coefficient(matrix,i)){}//matrix ตัวก่อนหน้า ตัวนำ 1 ต้องเยื่องไปข้างหน้ากว่าตัวปัจจุบัน) 
-                else if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.row_is_zero(matrix,i)){}//matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
+                if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.row_is_zero(matrix,i)){}//matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
                 else if(m_o.row_is_zero(matrix,i-1)&&m_o.row_is_zero(matrix,i)){}///matrix ตัวก่อนหน้าต้องป็น 0 ทั้งแถวและ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
                 else {return false;}
             }
             else {return false;}                        
+        }
+        for(int i=1;i<=rows;i++){
+            if(m_o.leading_coefficient(matrix,i)!=-1){//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
+                for(int l=i;l<=rows;l++){
+                    if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น เฉพาะข้างล่าง
+                    else if(l==i){}//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
+                    else return false;
+                }
+            }
         }
         return true;
     }
@@ -100,7 +110,7 @@ class matrix_operation{
             for(int i=1;i<=rows;i++){
                 if(m_o.leading_coefficient(matrix,i)!=-1){//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
                     for(int l=1;l<=rows;l++){
-                        if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น
+                        if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น ทั้งข้างบนข้างล่าง
                         else if(l==i){}//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
                         else return false;
                     }
@@ -137,6 +147,14 @@ class matrix_operation{
         }
     }
 
+    void rem(float[][]matrix){
+        matrix_operation m_o=new matrix_operation(rows,columns);
+        while(m_o.check_row_echelon_matrix(matrix)!=true){
+            for(int i=2;i<rows;i++){
+                if(m_o.row_is_zero(matrix, i-1)&&m_o.row_is_zero(matrix, i)){m_o.switching_two_rows(matrix, i-1, i);i=2;}
+            }            
+        }
+    }
 
 
 }
