@@ -1,29 +1,5 @@
 import java.util.*;
-public class algorithm
-{
-    public static void main(String[] arngs)
-    {   
-        Scanner input=new Scanner(System.in);
-        int rows,columns;
-
-        System.out.print("Pls input rows size:");
-        rows=input.nextInt();
-        System.out.print("Pls input columns size:");
-        columns=input.nextInt();
-        
-        float[][] matrix=new float[rows][columns];
-        matrix_operation matrix_operation=new matrix_operation(rows,columns);
-        matrix_operation.input_matix_all(matrix);
-
-        System.out.println("REM : "+matrix_operation.check_row_echelon_matrix(matrix));
-        System.out.println("RREM : "+matrix_operation.check_reduce_row_echelon_matrix(matrix));
-        //matrix_operation.rem(matrix);
-        matrix_operation.print_matrix(matrix);
-        
-    }
-}
-
-class matrix_operation{
+public class matrix_operation{
     /*
     rows คือ จำนวนแถว
     columns คือ จำนวนหลัก
@@ -45,7 +21,15 @@ class matrix_operation{
             }
         }
     }
-
+/* 
+    void input_matix_all_with_array(float[][]matrix,float[][]array){//ใส่ค่าให้ matrix เฉยๆ
+        for(int i=0;i<rows;i++){
+            for(int l=0;l<columns;l++){
+                matrix[i][l]=array[i][l];
+            }
+        }
+    }
+*/
     void print_matrix(float[][] matrix){
         for(int i=0;i<rows;i++){
             for(int l=0;l<columns;l++){
@@ -85,7 +69,11 @@ class matrix_operation{
             else return false;}
         for(int i=2;i<=rows;i++){
             if((m_o.leading_coefficient(matrix,i-1)!=-1||m_o.row_is_zero(matrix,i-1))&&(m_o.leading_coefficient(matrix,i)!=-1||m_o.row_is_zero(matrix,i))){//ถ้า (matrix ตัวก่อนหน้ามีตัวนำ 1 หรือเป็น 0 ทั้งแถว) และ (matrix ตัวปัจจุบันมีตัวนำ 1 หรือเป็น 0 ทั้งแถว)
-                if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.row_is_zero(matrix,i)){}//matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
+                if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.leading_coefficient(matrix,i)!=-1){
+                    if(m_o.leading_coefficient(matrix,i-1)<m_o.leading_coefficient(matrix,i)){}
+                    else{return false;}
+                }
+                else if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.row_is_zero(matrix,i)){}//matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
                 else if(m_o.row_is_zero(matrix,i-1)&&m_o.row_is_zero(matrix,i)){}///matrix ตัวก่อนหน้าต้องป็น 0 ทั้งแถวและ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
                 else {return false;}
             }
@@ -96,7 +84,7 @@ class matrix_operation{
                 for(int l=i;l<=rows;l++){
                     if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น เฉพาะข้างล่าง
                     else if(l==i){}//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
-                    else return false;
+                    else {return false;}
                 }
             }
         }
@@ -158,4 +146,3 @@ class matrix_operation{
 
 
 }
-
