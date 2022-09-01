@@ -1,5 +1,6 @@
 public class test_case {
     public static void main(String[] arngs){
+        /*
         System.out.println("ข้อ 1");
         matrix_operation m1 = new matrix_operation(2,4);
         float[][] a1=new float[2][4];
@@ -80,9 +81,130 @@ public class test_case {
         m8.print_matrix(a8);
         System.out.println("rem : "+m8.check_row_echelon_matrix(a8)+"|false , rrem : "+m8.check_reduce_row_echelon_matrix(a8)+"|false");
         System.out.println();
+        */
 
+        test_case_tool test=new test_case_tool();
 
+        System.out.println("ข้อ 1");
+        float[] array1={
+            1,0,2,1,
+            0,1,4,3     
+        };
+        test.use(2, 4, array1, true, true);
+
+        System.out.println("ข้อ 2");
+        float[] array2={
+            0,0,0,
+            0,0,0,
+            0,0,0       
+        };
+        test.use(3, 3, array2, true, true);
+
+        System.out.println("ข้อ 3");
+        float[] array3={
+            1,0,0,
+            0,0,0,
+            0,0,1       
+        };
+        test.use(3, 3, array3, false, false);
+
+        System.out.println("ข้อ 4");
+        float[] array4={
+            0,1,0,
+            1,0,0,
+            0,0,1       
+        };
+        test.use(3, 3, array4, false, false);
+
+        System.out.println("ข้อ 5");
+        float[] array5={
+            -2,5,2,
+            0,1,-1,
+            0,0,3       
+        };
+        test.use(3, 3, array5, false, false);
+
+        System.out.println("ข้อ 6");
+        float[] array6={
+            1,0,0,6,
+            0,0,1,7,
+            0,1,0,5    
+        };
+        test.use(3, 4, array6, false, false);
+
+        System.out.println("ข้อ 7");
+        float[] array7={
+            1,3,0,2,0,
+            0,0,1,1,0,
+            0,0,0,0,1,
+            0,0,0,0,0,  
+        };
+        test.use(4, 5, array7, true, true);
+
+        System.out.println("ข้อ 8");
+        float[] array8={
+            1,2,0,3,0,
+            1,0,2,2,0,
+            0,0,0,0,1,
+            0,0,0,0,0,  
+        };
+        test.use(4, 5, array8, false, false);
+
+        System.out.println("ข้อ 9");
+        float[] array9={
+            1,2,0,0,1,
+            0,0,1,2,3,
+            0,0,0,0,0 
+        };
+        test.use(3, 5, array9, true, true);
+        
+        System.out.println("ข้อ 10");
+        float[] array10={
+            1,2,0,4,
+            0,0,0,0,
+            0,0,1,-3,
+        };
+        test.use(3, 4, array10, false, false);
+
+        System.out.println("ข้อ 11");
+        float[] array11={
+            1,0,3,4,
+            0,2,-2,5,
+            0,0,1,2
+        };
+        test.use(3, 4, array11, false, false);
+
+        System.out.println("ข้อ 12");
+        float[] array12={
+            1,2,3,4,
+            0,1,-2,5,
+            0,0,1,2
+        };
+        test.use(3, 4, array12, true, false);
+
+        
 
     }
     
 }
+
+
+class test_case_tool{
+    test_case_tool(){};
+    void use(int rows,int columns,float[] array,boolean rem,boolean rrem){
+        matrix_operation m = new matrix_operation(rows,columns);
+        float[][] matrix=new float[rows][columns];
+        for(int i=0;i<rows;i++){
+            for(int l=0;l<columns;l++){
+                matrix[i][l]=array[(i*columns)+l];
+            }
+        }
+        m.print_matrix(matrix);
+        System.out.println("expectation | rem  : "+rem+" , rrem : "+rrem);
+        System.out.println("result      | rem  : "+m.check_row_echelon_matrix(matrix)+" , rrem : "+m.check_reduce_row_echelon_matrix(matrix));
+        System.out.println("__________________________________________________________");
+        System.out.println();
+    }
+    
+}
+
