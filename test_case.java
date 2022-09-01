@@ -1,3 +1,5 @@
+import javax.print.FlavorException;
+
 public class test_case {
     public static void main(String[] arngs){
         /*
@@ -182,6 +184,54 @@ public class test_case {
         };
         test.use(3, 4, array12, true, false);
 
+        System.out.println("ข้อ 13");
+        float[] array13={
+            1,2,-5,2,
+            0,1,-2,0,
+            0,0,0,0
+        };
+        test.use(3, 4, array13, true, false);
+
+        System.out.println("ข้อ 14");
+        float[] array14={
+            0,0,0,0
+        };
+        test.use(1, 4, array14, true, true);
+
+        System.out.println("ข้อ 15");
+        float[] array15={
+            1,1,1,1,1
+        };
+        test.use(1, 5, array15, true, true);
+
+        System.out.println("ข้อ 16");
+        float[] array16={
+            0,0,0,1
+        };
+        test.use(1, 4, array16, true, true);
+
+        System.out.println("ข้อ 17");
+        float[] array17={
+            1,
+            0,
+            1,
+            0,
+            1
+        };
+        test.use(5, 1, array17, false, false);
+
+        System.out.println("ข้อ 18");
+        float[] array18={
+            0,
+            0,
+            1,
+            0,
+            1
+        };
+        test.use(5, 1, array18, false, false);
+
+
+
         
 
     }
@@ -202,6 +252,9 @@ class test_case_tool{
         m.print_matrix(matrix);
         System.out.println("expectation | rem  : "+rem+" , rrem : "+rrem);
         System.out.println("result      | rem  : "+m.check_row_echelon_matrix(matrix)+" , rrem : "+m.check_reduce_row_echelon_matrix(matrix));
+        if(rem!=m.check_row_echelon_matrix(matrix)||rrem!=m.check_reduce_row_echelon_matrix(matrix)){
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!NOT PASS!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        }
         System.out.println("__________________________________________________________");
         System.out.println();
     }
