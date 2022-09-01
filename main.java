@@ -17,7 +17,7 @@ public class main
 
         System.out.println("REM : "+matrix_operation.check_row_echelon_matrix(matrix));
         System.out.println("RREM : "+matrix_operation.check_reduce_row_echelon_matrix(matrix));
-        //matrix_operation.rem(matrix);
+        matrix_operation.rem(matrix);
         matrix_operation.print_matrix(matrix);
 
         

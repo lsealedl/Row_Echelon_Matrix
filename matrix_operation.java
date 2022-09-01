@@ -21,15 +21,7 @@ public class matrix_operation{
             }
         }
     }
-/* 
-    void input_matix_all_with_array(float[][]matrix,float[][]array){//ใส่ค่าให้ matrix เฉยๆ
-        for(int i=0;i<rows;i++){
-            for(int l=0;l<columns;l++){
-                matrix[i][l]=array[i][l];
-            }
-        }
-    }
-*/
+
     void print_matrix(float[][] matrix){
         for(int i=0;i<rows;i++){
             for(int l=0;l<columns;l++){
@@ -135,11 +127,11 @@ public class matrix_operation{
         }
     }
 
-    void rem(float[][]matrix){
+    void rem(float[][]matrix){//ยังไม่เสร็จ อาจไม่ต้องทำ
         matrix_operation m_o=new matrix_operation(rows,columns);
         while(m_o.check_row_echelon_matrix(matrix)!=true){
-            for(int i=2;i<rows;i++){
-                if(m_o.row_is_zero(matrix, i-1)&&m_o.row_is_zero(matrix, i)){m_o.switching_two_rows(matrix, i-1, i);i=2;}
+            for(int i=2;i<=rows;i++){
+                if(m_o.row_is_zero(matrix, i-1)&&(m_o.row_is_zero(matrix, i)==false)){m_o.switching_two_rows(matrix, i-1, i);i=2;}
             }            
         }
     }
