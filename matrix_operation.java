@@ -100,7 +100,7 @@ public class matrix_operation{
         }
         return false;
     }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////หลังจากนี้เป็นส่วนของการให้หา rem ไม่ใช่เช็ค
     void multiplying_row_by_constant(float[][] matrix,int row,float constant){
         if(constant==0){
             return;
