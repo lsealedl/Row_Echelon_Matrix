@@ -3,47 +3,10 @@ import javax.swing.*;
 import java.util.*;
 import java.awt.*;
 import java.lang.Math;
+import java.awt.event.*;
 public class guimatrix {
     
-    public static void main(String[] args) {
-        new input_Mx_size();
-    }
-}
-class input_Mx_size{
-    input_Mx_size(){
-    JFrame f =new JFrame();
-    Container cp = f.getContentPane();
-    cp.setLayout(new BorderLayout());
-     
-    JPanel p = new JPanel();
-    p.setLayout(new GridBagLayout());
-    JLabel l = new JLabel("Please Input Matrix");
-    JTextField tf = new JTextField("",4);
-    JTextField tf2 = new JTextField("",4);
-    JButton reset_b =new JButton("reset matrix");
-    l.setHorizontalAlignment(JLabel.CENTER);
-    GridBagConstraints c = new GridBagConstraints();
-    c.insets=new Insets (20,20,20,20);
-    p.add(l,c);
-    c.gridx=0;c.gridy=1;
-    p.add(tf,c);
-    c.gridx=1;c.gridy=1;
-    p.add(tf2,c);
-    c.gridx=0;c.gridy=2;
-    p.add(reset_b,c);
-    cp.add(p);
-    
-    
-
-    f.setSize(300,250);
-    f.setVisible(true);
-    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.setLocationRelativeTo(null);
-    }
-}
-class  matrix
-{   
-    matrix(){
+    guimatrix(){
     JFrame f =new JFrame();
     Container cp = f.getContentPane();
     cp.setLayout(new BorderLayout());
