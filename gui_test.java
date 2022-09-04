@@ -5,7 +5,7 @@ import java.awt.event.*;
 class a{
     public static void main(String[] arngs)
     {   
-        gui_test1 test=new gui_test1();
+        new gui_test1();
         
     }
 }
@@ -77,33 +77,38 @@ public class gui_test implements ActionListener {
         
 
     }
-    public void actionPerformed(ActionEvent e){ 
+    public void actionPerformed(ActionEvent click_event){ 
         matrix_operation m_o=new matrix_operation(rows, columns);
-        if(e.getSource() == reset_b){
-            for(int i=0;i<columns;i++){
-                for(int l=0;l<rows;l++){
-                    jc[(i*columns)+l].setText("");
-            }
-        }
-        }
-        else if(e.getSource() == rem_Button){
-            float[][] matrix=new float[rows][columns];
-            for(int i=0;i<columns;i++){
-                for(int l=0;l<rows;l++){
-                matrix[i][l]=Float.parseFloat(jc[(i*columns)+l].getText());
+        try {
+            if(click_event.getSource() == reset_b){
+                for(int i=0;i<columns;i++){
+                    for(int l=0;l<rows;l++){
+                        jc[(i*columns)+l].setText("");
                 }
             }
-            JOptionPane.showMessageDialog(null, "Row Echelon Matrix : "+m_o.check_row_echelon_matrix(matrix));
-        }
-        else if(e.getSource() == rrem_Button){
-            float[][] matrix=new float[rows][columns];
-            for(int i=0;i<columns;i++){
-                for(int l=0;l<rows;l++){
-                matrix[i][l]=Float.parseFloat(jc[(i*columns)+l].getText());
-                }
             }
-            JOptionPane.showMessageDialog(null, "Reduce Row Echelon Matrix : "+m_o.check_reduce_row_echelon_matrix(matrix));
+            else if(click_event.getSource() == rem_Button){
+                float[][] matrix=new float[rows][columns];
+                for(int i=0;i<columns;i++){
+                    for(int l=0;l<rows;l++){
+                    matrix[i][l]=Float.parseFloat(jc[(i*columns)+l].getText());
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Row Echelon Matrix : "+m_o.check_row_echelon_matrix(matrix));
+            }
+            else if(click_event.getSource() == rrem_Button){
+                float[][] matrix=new float[rows][columns];
+                for(int i=0;i<columns;i++){
+                    for(int l=0;l<rows;l++){
+                    matrix[i][l]=Float.parseFloat(jc[(i*columns)+l].getText());
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Reduce Row Echelon Matrix : "+m_o.check_reduce_row_echelon_matrix(matrix));
+            }    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Pls input only float");
         }
+        
     }
 }
 class gui_test1 implements ActionListener{
@@ -159,11 +164,18 @@ class gui_test1 implements ActionListener{
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLocationRelativeTo(null);
     }
-    public void actionPerformed(ActionEvent e){ 
-        if(e.getSource() == input_Button){
-            int row=Integer.parseInt(row_textbox.getText());
-            int column=Integer.parseInt(column_textbox.getText());
-            gui_test test=new gui_test(row,column);
+    public void actionPerformed(ActionEvent click_event){ 
+        if(click_event.getSource() == input_Button){
+            try {
+                int row=Integer.parseInt(row_textbox.getText());
+                int column=Integer.parseInt(column_textbox.getText());
+                if((row>=1&&row<=10)&&column>=1&&column<=10){
+                    new gui_test(row,column);
+                }
+                else{JOptionPane.showMessageDialog(null, "row and column size must be in 1 to 10");}
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Pls input only float");
+            }
         }
     }
 
