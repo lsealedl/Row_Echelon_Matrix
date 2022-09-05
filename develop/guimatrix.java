@@ -20,7 +20,7 @@ public class guimatrix {
     cp.add(p,BorderLayout.NORTH);
     
     GridBagConstraints c = new GridBagConstraints();
-    c.insets=new Insets (15,15,15,15);
+    c.insets=new Insets (5,5,5,5);
     int n=0;
     for(int i=0;i<10;i++){
         for(int l=0;l<10;l++){
@@ -33,12 +33,12 @@ public class guimatrix {
     p2.setLayout(new GridBagLayout());
     JButton reset_b =new JButton("reset matrix");
     GridBagConstraints c2 = new GridBagConstraints();
-    c2.insets=new Insets (40,40,40,40);
+    c2.insets=new Insets (40,5,5,5);
     p2.add(reset_b,c2);
     cp.add(p2,BorderLayout.SOUTH);
     
     f.add(p);  
-    f.setSize(700,700);
+    f.pack();
     f.setVisible(true);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setLocationRelativeTo(null);
