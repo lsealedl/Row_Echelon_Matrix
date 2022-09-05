@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -162,7 +162,7 @@ class gui_second_page_test implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent click_event) {
-        matrix_operation m_o=new matrix_operation(row, column);
+        matrix_operation_develop m_o=new matrix_operation_develop(row, column);
         try {
             if(click_event.getSource() == reset_Button){
                 for(int i=0;i<column;i++){

@@ -1,9 +1,6 @@
 import java.util.Scanner;
 import javax.swing.*;
-import java.util.*;
 import java.awt.*;
-import java.lang.Math;
-import java.awt.event.*;
 public class guimatrix {
     
     guimatrix(){

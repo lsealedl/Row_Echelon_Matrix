@@ -1,13 +1,13 @@
 import java.util.*;
 
-interface matrix_operation_template{
+interface matrix_operation_develop_template{
     boolean row_is_zero(float[][]matrix,int row);
     int leading_coefficient(float[][]matrix,int row);
     boolean check_row_echelon_matrix(float[][] matrix);
     boolean check_reduce_row_echelon_matrix(float[][] matrix);
 }
 
-public class matrix_operation implements matrix_operation_template{
+public class matrix_operation_develop implements matrix_operation_develop_template{
     /*
     rows คือ จำนวนแถว
     columns คือ จำนวนหลัก
@@ -16,7 +16,7 @@ public class matrix_operation implements matrix_operation_template{
     int rows,columns;
     Scanner input=new Scanner(System.in);
 
-    matrix_operation(int rows,int columns){//กำหนดจำนวนแถวและหลัก
+    matrix_operation_develop(int rows,int columns){//กำหนดจำนวนแถวและหลัก
         this.rows=rows;
         this.columns=columns;
     }  
@@ -136,7 +136,7 @@ public class matrix_operation implements matrix_operation_template{
             matrix[row_2-1][i]=tmp;
         }
     }
-
+    /*
     void rem(float[][]matrix){//ยังไม่เสร็จ อาจไม่ต้องทำ
         matrix_operation m_o=new matrix_operation(rows,columns);
         while(m_o.check_row_echelon_matrix(matrix)!=true){
@@ -145,6 +145,6 @@ public class matrix_operation implements matrix_operation_template{
             }            
         }
     }
-
+    */
 
 }

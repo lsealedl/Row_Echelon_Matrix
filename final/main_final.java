@@ -90,10 +90,10 @@ class gui_first_page implements ActionListener{
 
 class gui_second_page_test implements ActionListener{
     JTextField matrix_textfield[]= new JTextField[100];
-    JButton rem_Button=new JButton("rem check");
-    JButton rrem_Button=new JButton("rrem check"); 
-    JButton reset_Button =new JButton("reset matrix");
-    JButton fill_zero_Button =new JButton("fill empty matix with 0");
+    JButton rem_Button=new JButton("Row Echelon Check");
+    JButton rrem_Button=new JButton("Reduced Row Echelon Check"); 
+    JButton reset_Button =new JButton("Reset Matrix");
+    JButton fill_zero_Button =new JButton("Fill Empty Matix With 0");
     int row,column;
 
     gui_second_page_test(int row,int column){
@@ -156,7 +156,7 @@ class gui_second_page_test implements ActionListener{
         rem_Button.addActionListener(this);
         rrem_Button.addActionListener(this);
 
-        frame.setSize(500,450);
+        frame.setSize(700,450);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);

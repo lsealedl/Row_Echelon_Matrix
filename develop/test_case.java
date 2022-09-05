@@ -221,7 +221,7 @@ public class test_case {
 class test_case_tool{
     test_case_tool(){};
     void use(int rows,int columns,float[] array,boolean rem,boolean rrem){
-        matrix_operation m = new matrix_operation(rows,columns);
+        matrix_operation_develop m = new matrix_operation_develop(rows,columns);
         float[][] matrix=new float[rows][columns];
         for(int i=0;i<rows;i++){
             for(int l=0;l<columns;l++){
