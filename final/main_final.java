@@ -10,15 +10,16 @@ public class main_final{
 }
 
 class gui_first_page implements ActionListener{
-    JLabel in_put_matrix_label = new JLabel("Input Matrix Size");
-    JLabel row_label = new JLabel("Row Size");
-    JLabel column_label = new JLabel("Column Size");
-    JTextField row_textbox= new JTextField("",3);
-    JTextField column_textbox= new JTextField("",3);
-    JButton input_Button=new JButton("Input");
+    private JLabel input_matrix_label = new JLabel("Input Matrix Size");
+    private JLabel row_label = new JLabel("Row Size");
+    private JLabel column_label = new JLabel("Column Size");
+    private JTextField row_textbox= new JTextField("",3);
+    private JTextField column_textbox= new JTextField("",3);
+    private JButton input_Button=new JButton("Input");
+    private JFrame frame =new JFrame();
 
     gui_first_page(){
-        JFrame frame =new JFrame();
+
         Container container = frame.getContentPane();
         container.setLayout(new BorderLayout());
 
@@ -37,8 +38,8 @@ class gui_first_page implements ActionListener{
         c.gridx=1;c.gridy=1;
         //System.out.println(javax.swing.UIManager.getDefaults().getFont("Label.font"));
 
-        in_put_matrix_label.setFont(new Font("Dialog",Font.BOLD,25));
-        main_panel.add(in_put_matrix_label,c);
+        input_matrix_label.setFont(new Font("Dialog",Font.BOLD,25));
+        main_panel.add(input_matrix_label,c);
         c.insets=new Insets(0,0,0,0);
 
         c.insets=new Insets(0,10,0,10);
@@ -68,7 +69,6 @@ class gui_first_page implements ActionListener{
 
         frame.setSize(300,200);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
     }
     public void actionPerformed(ActionEvent click_event){ 
@@ -78,6 +78,8 @@ class gui_first_page implements ActionListener{
                 int column=Integer.parseInt(column_textbox.getText());
                 if((row>=1&&row<=10)&&column>=1&&column<=10){
                     new gui_second_page_test(row,column);
+                    frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+
                 }
                 else{JOptionPane.showMessageDialog(null, "row and column size must be in 1 to 10");}
             } catch (Exception e) {
@@ -89,12 +91,12 @@ class gui_first_page implements ActionListener{
 }
 
 class gui_second_page_test implements ActionListener{
-    JTextField matrix_textfield[]= new JTextField[100];
-    JButton rem_Button=new JButton("Row Echelon Check");
-    JButton rrem_Button=new JButton("Reduced Row Echelon Check"); 
-    JButton reset_Button =new JButton("Reset Matrix");
-    JButton fill_zero_Button =new JButton("Fill Empty Matix With 0");
-    int row,column;
+    private JTextField matrix_textfield[]= new JTextField[100];
+    private JButton rem_Button=new JButton("Row Echelon Check");
+    private JButton rrem_Button=new JButton("Reduced Row Echelon Check"); 
+    private JButton reset_Button =new JButton("Reset Matrix");
+    private JButton fill_zero_Button =new JButton("Fill Empty Matix With 0");
+    private int row,column;
 
     gui_second_page_test(int row,int column){
         this.row=row;
@@ -158,7 +160,7 @@ class gui_second_page_test implements ActionListener{
 
         frame.setSize(700,450);
         frame.setVisible(true);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
     }
 
@@ -167,16 +169,16 @@ class gui_second_page_test implements ActionListener{
         matrix_operation m_o=new matrix_operation(row, column);
         try {
             if(click_event.getSource() == reset_Button){
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
                         matrix_textfield[(i*column)+l].setText("");
                 }
             }
             }
             else if(click_event.getSource() == rem_Button){
                 float[][] matrix=new float[row][column];
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
                     matrix[i][l]=Float.parseFloat(matrix_textfield[(i*column)+l].getText());
                     }
                 }
@@ -184,16 +186,16 @@ class gui_second_page_test implements ActionListener{
             }
             else if(click_event.getSource() == rrem_Button){
                 float[][] matrix=new float[row][column];
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
                     matrix[i][l]=Float.parseFloat(matrix_textfield[(i*column)+l].getText());
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Reduce Row Echelon Matrix : "+m_o.check_reduce_row_echelon_matrix(matrix));
             }    
             else if(click_event.getSource() == fill_zero_Button){
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){ 
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){ 
                         if((matrix_textfield[(i*column)+l].getText().isBlank())){
                             matrix_textfield[(i*column)+l].setText("0");
                         }
@@ -220,7 +222,7 @@ class matrix_operation implements matrix_operation_template{
     columns คือ จำนวนหลัก
     ปัญหาคือ เวลาเก็บใน array มันเริ่มที่ 0 แต่ใน matrix มันเริ่มที่ 1 เวลาใช้ method เลยนับว่าให้เริ่มที่ 1 ตาม matrix
     */
-    int rows,columns;
+    public int rows,columns;
     Scanner input=new Scanner(System.in);
 
     matrix_operation(int rows,int columns){//กำหนดจำนวนแถวและหลัก

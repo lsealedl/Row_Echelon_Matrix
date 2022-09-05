@@ -65,7 +65,7 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
     }
     
     public boolean check_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น row echelon matrix เปล่า
-        matrix_operation m_o=new matrix_operation(rows,columns);
+        matrix_operation_develop m_o=new matrix_operation_develop(rows,columns);
         if(rows==1){
             if((m_o.row_is_zero(matrix,1))||m_o.leading_coefficient(matrix,1)!=-1){return true;}//ถ้า matrix มี 1 แถวแล้วแถว 1 เป็น 0 ทั้งแถวหรือมีตัวนำ 1
             else return false;}
@@ -95,7 +95,7 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
 
     
     public boolean check_reduce_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น reduce row echelon matrix เปล่า
-        matrix_operation m_o=new matrix_operation(rows,columns);
+        matrix_operation_develop m_o=new matrix_operation_develop(rows,columns);
         if(m_o.check_row_echelon_matrix(matrix)){//เช็คว่าเป็น rem เปล่าถ้าไม่เป็นก็ไม่มีทางเป็น rrem ได้
             for(int i=1;i<=rows;i++){
                 if(m_o.leading_coefficient(matrix,i)!=-1){//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
