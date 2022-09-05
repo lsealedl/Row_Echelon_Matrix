@@ -35,6 +35,9 @@ class gui_first_page implements ActionListener{
         //////////////////////////////////////////////////////จัดองค์ประกอบต่างๆ
         c.insets=new Insets(5,0,30,0);
         c.gridx=1;c.gridy=1;
+        //System.out.println(javax.swing.UIManager.getDefaults().getFont("Label.font"));
+
+        in_put_matrix_label.setFont(new Font("Dialog",Font.BOLD,25));
         main_panel.add(in_put_matrix_label,c);
         c.insets=new Insets(0,0,0,0);
 
