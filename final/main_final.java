@@ -2,15 +2,14 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class gui_test{
+public class main_final{
     public static void main(String[] arngs)
     {   
-        new gui_first_page_test();
-        
+        new gui_first_page();
     }
 }
 
-class gui_first_page_test implements ActionListener{
+class gui_first_page implements ActionListener{
     JLabel in_put_matrix_label = new JLabel("Input Matrix Size");
     JLabel row_label = new JLabel("Row Size");
     JLabel column_label = new JLabel("Column Size");
@@ -18,7 +17,7 @@ class gui_first_page_test implements ActionListener{
     JTextField column_textbox= new JTextField("",3);
     JButton input_Button=new JButton("Input");
 
-    gui_first_page_test(){
+    gui_first_page(){
         JFrame frame =new JFrame();
         Container container = frame.getContentPane();
         container.setLayout(new BorderLayout());
@@ -202,5 +201,97 @@ class gui_second_page_test implements ActionListener{
             JOptionPane.showMessageDialog(null, "Pls input only float");
         }
         
+    }
+}
+
+interface matrix_operation_template{
+    boolean row_is_zero(float[][]matrix,int row);
+    int leading_coefficient(float[][]matrix,int row);
+    boolean check_row_echelon_matrix(float[][] matrix);
+    boolean check_reduce_row_echelon_matrix(float[][] matrix);
+}
+
+class matrix_operation implements matrix_operation_template{
+    /*
+    rows คือ จำนวนแถว
+    columns คือ จำนวนหลัก
+    ปัญหาคือ เวลาเก็บใน array มันเริ่มที่ 0 แต่ใน matrix มันเริ่มที่ 1 เวลาใช้ method เลยนับว่าให้เริ่มที่ 1 ตาม matrix
+    */
+    int rows,columns;
+    Scanner input=new Scanner(System.in);
+
+    matrix_operation(int rows,int columns){//กำหนดจำนวนแถวและหลัก
+        this.rows=rows;
+        this.columns=columns;
+    }  
+
+    public boolean row_is_zero(float[][]matrix,int row){//return ว่าแถวเป็น 0 ทั้งแถวหรือเปล่า
+        boolean row_is_zero=true;
+        for(int i=0;i<columns;i++){
+            if(matrix[row-1][i]==0){}
+            else{row_is_zero=false;}
+        }
+        if(row_is_zero==true){
+            return true;
+        }
+        else{return false;}
+    }
+
+    public int leading_coefficient(float[][]matrix,int row){//return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
+        for(int i=0;i<columns;i++){
+            if(matrix[row-1][i]==1){
+                return i+1;
+            }
+            else if(matrix[row-1][i]==0){}
+            else {return -1;}
+        }        
+        return -1;
+    }
+    
+    public boolean check_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น row echelon matrix เปล่า
+        matrix_operation m_o=new matrix_operation(rows,columns);
+        if(rows==1){
+            if((m_o.row_is_zero(matrix,1))||m_o.leading_coefficient(matrix,1)!=-1){return true;}//ถ้า matrix มี 1 แถวแล้วแถว 1 เป็น 0 ทั้งแถวหรือมีตัวนำ 1
+            else return false;}
+        for(int i=2;i<=rows;i++){
+            if((m_o.leading_coefficient(matrix,i-1)!=-1||m_o.row_is_zero(matrix,i-1))&&(m_o.leading_coefficient(matrix,i)!=-1||m_o.row_is_zero(matrix,i))){//ถ้า (matrix ตัวก่อนหน้ามีตัวนำ 1 หรือเป็น 0 ทั้งแถว) และ (matrix ตัวปัจจุบันมีตัวนำ 1 หรือเป็น 0 ทั้งแถว)
+                if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.leading_coefficient(matrix,i)!=-1){
+                    if(m_o.leading_coefficient(matrix,i-1)<m_o.leading_coefficient(matrix,i)){}
+                    else{return false;}
+                }
+                else if(m_o.leading_coefficient(matrix,i-1)!=-1&&m_o.row_is_zero(matrix,i)){}//matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
+                else if(m_o.row_is_zero(matrix,i-1)&&m_o.row_is_zero(matrix,i)){}///matrix ตัวก่อนหน้าต้องป็น 0 ทั้งแถวและ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
+                else {return false;}
+            }
+            else {return false;}                        
+        }
+        for(int i=1;i<=rows;i++){
+            if(m_o.leading_coefficient(matrix,i)!=-1){//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
+                for(int l=i;l<=rows;l++){
+                    if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น เฉพาะข้างล่าง
+                    else if(l==i){}//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
+                    else {return false;}
+                }
+            }
+        }
+        return true;
+    }
+
+    
+    public boolean check_reduce_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น reduce row echelon matrix เปล่า
+        matrix_operation m_o=new matrix_operation(rows,columns);
+        if(m_o.check_row_echelon_matrix(matrix)){//เช็คว่าเป็น rem เปล่าถ้าไม่เป็นก็ไม่มีทางเป็น rrem ได้
+            for(int i=1;i<=rows;i++){
+                if(m_o.leading_coefficient(matrix,i)!=-1){//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
+                    for(int l=1;l<=rows;l++){
+                        if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น ทั้งข้างบนข้างล่าง
+                        else if(l==i){}//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
+                        else return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

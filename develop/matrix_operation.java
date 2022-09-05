@@ -1,5 +1,13 @@
 import java.util.*;
-public class matrix_operation{
+
+interface matrix_operation_template{
+    boolean row_is_zero(float[][]matrix,int row);
+    int leading_coefficient(float[][]matrix,int row);
+    boolean check_row_echelon_matrix(float[][] matrix);
+    boolean check_reduce_row_echelon_matrix(float[][] matrix);
+}
+
+public class matrix_operation implements matrix_operation_template{
     /*
     rows คือ จำนวนแถว
     columns คือ จำนวนหลัก
@@ -12,7 +20,7 @@ public class matrix_operation{
         this.rows=rows;
         this.columns=columns;
     }  
-    
+    ////////////////////////////////////////////////////////////////
     void input_matix_all(float[][]matrix){//ใส่ค่าให้ matrix เฉยๆ
         for(int i=0;i<rows;i++){
             for(int l=0;l<columns;l++){
@@ -31,7 +39,9 @@ public class matrix_operation{
         }
     }
 
-    boolean row_is_zero(float[][]matrix,int row){//return ว่าแถวเป็น 0 ทั้งแถวหรือเปล่า
+    ///////////////////////////////////////////////////////////////////
+
+    public boolean row_is_zero(float[][]matrix,int row){//return ว่าแถวเป็น 0 ทั้งแถวหรือเปล่า
         boolean row_is_zero=true;
         for(int i=0;i<columns;i++){
             if(matrix[row-1][i]==0){}
@@ -43,7 +53,7 @@ public class matrix_operation{
         else{return false;}
     }
 
-    int leading_coefficient(float[][]matrix,int row){//return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
+    public int leading_coefficient(float[][]matrix,int row){//return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
         for(int i=0;i<columns;i++){
             if(matrix[row-1][i]==1){
                 return i+1;
@@ -54,7 +64,7 @@ public class matrix_operation{
         return -1;
     }
     
-    boolean check_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น row echelon matrix เปล่า
+    public boolean check_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น row echelon matrix เปล่า
         matrix_operation m_o=new matrix_operation(rows,columns);
         if(rows==1){
             if((m_o.row_is_zero(matrix,1))||m_o.leading_coefficient(matrix,1)!=-1){return true;}//ถ้า matrix มี 1 แถวแล้วแถว 1 เป็น 0 ทั้งแถวหรือมีตัวนำ 1
@@ -84,7 +94,7 @@ public class matrix_operation{
     }
 
     
-    boolean check_reduce_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น reduce row echelon matrix เปล่า
+    public boolean check_reduce_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น reduce row echelon matrix เปล่า
         matrix_operation m_o=new matrix_operation(rows,columns);
         if(m_o.check_row_echelon_matrix(matrix)){//เช็คว่าเป็น rem เปล่าถ้าไม่เป็นก็ไม่มีทางเป็น rrem ได้
             for(int i=1;i<=rows;i++){

@@ -1,5 +1,5 @@
 import java.util.*;
-public class main
+public class main_test
 {
     public static void main(String[] arngs)
     {   
