@@ -222,7 +222,7 @@ class matrix_operation implements matrix_operation_template{
     columns คือ จำนวนหลัก
     ปัญหาคือ เวลาเก็บใน array มันเริ่มที่ 0 แต่ใน matrix มันเริ่มที่ 1 เวลาใช้ method เลยนับว่าให้เริ่มที่ 1 ตาม matrix
     */
-    public int rows,columns;
+    private int rows,columns;
     Scanner input=new Scanner(System.in);
 
     matrix_operation(int rows,int columns){//กำหนดจำนวนแถวและหลัก
