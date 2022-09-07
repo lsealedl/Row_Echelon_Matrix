@@ -92,7 +92,7 @@ class gui_second_page_test implements ActionListener{
     JButton RowSizeDownJButton =new JButton("Row Size Down");
     JButton ColumnSizeUpJButton =new JButton("Column Size Up");
     JButton ColumnSizeDownJButton =new JButton("Column Size Down");
-    JTextField matrix_textfield[]= new JTextField[100];
+    JTextField matrix_textfield[][]= new JTextField[10][10];
     JButton rem_Button=new JButton("rem check");
     JButton rrem_Button=new JButton("rrem check"); 
     JButton reset_Button =new JButton("reset matrix");
@@ -126,20 +126,21 @@ class gui_second_page_test implements ActionListener{
         //////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////สร้างช่อง matrix
-        for(int i=0;i<100;i++){
-            matrix_textfield[i]=new JTextField("",3);
-            matrix_textfield[i].setHorizontalAlignment(SwingConstants.CENTER);
+        for(int i=0;i<10;i++){
+            for(int l=0;l<10;l++)
+            matrix_textfield[i][l]=new JTextField("",3);
+            //matrix_textfield[i][l].setHorizontalAlignment(SwingConstants.CENTER);
         }
         //////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////จัดองค์ประกอบต่างๆ
         c.insets=new Insets (5,5,5,5);
-        int n=0;
+        //int n=0;
         for(int i=0;i<row;i++){
             for(int l=0;l<column;l++){
                 c.gridx=l;c.gridy=i;
-                matrix_panel.add(matrix_textfield[n],c);
-                n++;
+                matrix_panel.add(matrix_textfield[i][l],c);
+                //n++;
             }
         }
 
@@ -190,14 +191,28 @@ class gui_second_page_test implements ActionListener{
         matrix_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets=new Insets (5,5,5,5);
-        int n=0;
+        for(int i=row;i<10;i++){
+            for(int l=0;l<10;l++){
+                matrix_textfield[i][l].setText("");
+            }
+        }
+        
+        for(int i=0;i<10;i++){
+            for(int l=column;l<10;l++){
+                matrix_textfield[i][l].setText("");
+            }
+        }
         for(int i=0;i<row;i++){
             for(int l=0;l<column;l++){
                 c.gridx=l;c.gridy=i;
-                matrix_panel.add(matrix_textfield[n],c);
-                n++;
+                matrix_panel.add(matrix_textfield[i][l],c);
+                //n++;
             }
         }
+        /* 
+        for(int i=n+1;i<100;i++){
+            matrix_textfield[n].setText("");
+        }*/
     }
     
     @Override
@@ -207,7 +222,7 @@ class gui_second_page_test implements ActionListener{
             if(click_event.getSource() == reset_Button){
                 for(int i=0;i<row;i++){
                     for(int l=0;l<column;l++){
-                        matrix_textfield[(i*column)+l].setText("");
+                        matrix_textfield[i][l].setText("");
                 }
             }
             }
@@ -215,7 +230,7 @@ class gui_second_page_test implements ActionListener{
                 float[][] matrix=new float[row][column];
                 for(int i=0;i<row;i++){
                     for(int l=0;l<column;l++){
-                    matrix[i][l]=Float.parseFloat(matrix_textfield[(i*column)+l].getText());
+                    matrix[i][l]=Float.parseFloat(matrix_textfield[i][l].getText());
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Row Echelon Matrix : "+m_o.check_row_echelon_matrix(matrix));
@@ -224,7 +239,7 @@ class gui_second_page_test implements ActionListener{
                 float[][] matrix=new float[row][column];
                 for(int i=0;i<row;i++){
                     for(int l=0;l<column;l++){
-                    matrix[i][l]=Float.parseFloat(matrix_textfield[(i*column)+l].getText());
+                    matrix[i][l]=Float.parseFloat(matrix_textfield[i][l].getText());
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Reduce Row Echelon Matrix : "+m_o.check_reduce_row_echelon_matrix(matrix));
@@ -232,8 +247,8 @@ class gui_second_page_test implements ActionListener{
             else if(click_event.getSource() == fill_zero_Button){
                 for(int i=0;i<row;i++){
                     for(int l=0;l<column;l++){ 
-                        if((matrix_textfield[(i*column)+l].getText().isBlank())){
-                            matrix_textfield[(i*column)+l].setText("0");
+                        if((matrix_textfield[i][l].getText().isBlank())){
+                            matrix_textfield[i][l].setText("0");
                         }
                     }
                 }
@@ -282,9 +297,9 @@ class gui_second_page_test implements ActionListener{
                 }
                 
             }
-            System.out.println("row="+row);
-            System.out.println("column="+column);
-            System.out.println("-------------------------");
+            //System.out.println("row="+row);
+            //System.out.println("column="+column);
+            //System.out.println("-------------------------");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Pls input only float"+e);
         }
