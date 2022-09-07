@@ -77,20 +77,20 @@ class gui_first_page implements ActionListener{
                 int row=Integer.parseInt(row_textbox.getText());
                 int column=Integer.parseInt(column_textbox.getText());
                 if((row>=1&&row<=10)&&column>=1&&column<=10){
-                    new gui_second_page_test(row,column);
+                    new gui_second_page(row,column);
                     frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 
                 }
                 else{JOptionPane.showMessageDialog(null, "row and column size must be in 1 to 10");}
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Pls input only float");
+                JOptionPane.showMessageDialog(null, "Pls input only integer");
             }
         }
     }
 
 }
 
-class gui_second_page_test implements ActionListener{
+class gui_second_page implements ActionListener{
     private JTextField matrix_textfield[]= new JTextField[100];
     private JButton rem_Button=new JButton("Row Echelon Check");
     private JButton rrem_Button=new JButton("Reduced Row Echelon Check"); 
@@ -98,7 +98,7 @@ class gui_second_page_test implements ActionListener{
     private JButton fill_zero_Button =new JButton("Fill Empty Matix With 0");
     private int row,column;
 
-    gui_second_page_test(int row,int column){
+    gui_second_page(int row,int column){
         this.row=row;
         this.column=column;
 

@@ -5,7 +5,8 @@ import java.awt.event.*;
 public class gui_test{
     public static void main(String[] arngs)
     {   
-        new gui_first_page_test();
+        //new gui_first_page_test();
+        new gui_second_page_test(1, 1);
         
     }
 }
@@ -87,6 +88,10 @@ class gui_first_page_test implements ActionListener{
 }
 
 class gui_second_page_test implements ActionListener{
+    JButton RowSizeUpJButton =new JButton("Row Size Up");
+    JButton RowSizeDownJButton =new JButton("Row Size Down");
+    JButton ColumnSizeUpJButton =new JButton("Column Size Up");
+    JButton ColumnSizeDownJButton =new JButton("Row Size Down");
     JTextField matrix_textfield[]= new JTextField[100];
     JButton rem_Button=new JButton("rem check");
     JButton rrem_Button=new JButton("rrem check"); 
@@ -94,34 +99,40 @@ class gui_second_page_test implements ActionListener{
     JButton fill_zero_Button =new JButton("fill empty matix with 0");
     int row,column;
 
+    JFrame frame =new JFrame();
+    Container container = frame.getContentPane();
+
+    JPanel main_panel = new JPanel();
+    JPanel matrix_panel = new JPanel();
+    JPanel button_panel = new JPanel();
+    JPanel top_panel = new JPanel();
+
+    GridBagConstraints c = new GridBagConstraints();
+
     gui_second_page_test(int row,int column){
         this.row=row;
         this.column=column;
 
-        JFrame frame =new JFrame();
-        Container container = frame.getContentPane();
         container.setLayout(new BorderLayout());
 
         //////////////////////////////////////////////////////ทำ panel ย่อย
-        JPanel main_panel = new JPanel();
         main_panel.setLayout(new GridBagLayout());
 
-        JPanel matrix_panel = new JPanel();
         matrix_panel.setLayout(new GridBagLayout());
         
-        JPanel button_panel = new JPanel();
         button_panel.setLayout(new GridBagLayout());
+
+        top_panel.setLayout(new GridBagLayout());
         //////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////สร้างช่อง matrix
-        for(int i=0;i<row*column;i++){
+        for(int i=0;i<100;i++){
             matrix_textfield[i]=new JTextField("",3);
             matrix_textfield[i].setHorizontalAlignment(SwingConstants.CENTER);
         }
         //////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////จัดองค์ประกอบต่างๆ
-        GridBagConstraints c = new GridBagConstraints();
         c.insets=new Insets (5,5,5,5);
         int n=0;
         for(int i=0;i<row;i++){
@@ -138,15 +149,25 @@ class gui_second_page_test implements ActionListener{
         button_panel.add(reset_Button,c);
         c.gridx=3;c.gridy=1;
         button_panel.add(rrem_Button,c);
-        
+
         c.gridx=1;c.gridy=1;
         main_panel.add(matrix_panel,c);
         c.gridx=1;c.gridy=2;
         main_panel.add(fill_zero_Button,c);
         c.gridx=1;c.gridy=3;
         main_panel.add(button_panel,c);
+
+        c.gridx=1;c.gridy=1;
+        top_panel.add(RowSizeUpJButton,c);
+        c.gridx=1;c.gridy=2;
+        top_panel.add(RowSizeDownJButton,c);
+        c.gridx=2;c.gridy=1;
+        top_panel.add(ColumnSizeUpJButton,c);
+        c.gridx=2;c.gridy=2;
+        top_panel.add(ColumnSizeDownJButton,c);
         //////////////////////////////////////////////////////
 
+        container.add(top_panel,BorderLayout.NORTH);
         container.add(main_panel,BorderLayout.CENTER);
 
         fill_zero_Button.addActionListener(this);
@@ -154,10 +175,28 @@ class gui_second_page_test implements ActionListener{
         rem_Button.addActionListener(this);
         rrem_Button.addActionListener(this);
 
-        frame.setSize(500,450);
+        RowSizeUpJButton.addActionListener(this);
+        RowSizeDownJButton.addActionListener(this);
+        ColumnSizeUpJButton.addActionListener(this);
+        ColumnSizeDownJButton.addActionListener(this);
+
+        frame.setSize(500,550);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+    }
+
+    public void generate_matrix(int row ,int column,JPanel matrix_panel){
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets=new Insets (5,5,5,5);
+        int n=0;
+        for(int i=0;i<row;i++){
+            for(int l=0;l<column;l++){
+                c.gridx=l;c.gridy=i;
+                matrix_panel.add(matrix_textfield[n],c);
+                n++;
+            }
+        }
     }
 
     @Override
@@ -173,8 +212,8 @@ class gui_second_page_test implements ActionListener{
             }
             else if(click_event.getSource() == rem_Button){
                 float[][] matrix=new float[row][column];
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
                     matrix[i][l]=Float.parseFloat(matrix_textfield[(i*column)+l].getText());
                     }
                 }
@@ -182,8 +221,8 @@ class gui_second_page_test implements ActionListener{
             }
             else if(click_event.getSource() == rrem_Button){
                 float[][] matrix=new float[row][column];
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
                     matrix[i][l]=Float.parseFloat(matrix_textfield[(i*column)+l].getText());
                     }
                 }
@@ -198,8 +237,56 @@ class gui_second_page_test implements ActionListener{
                     }
                 }
             }
+            else if(click_event.getSource() == RowSizeUpJButton){
+                if(row<10){
+                    row++;
+                    main_panel.remove(matrix_panel);
+                    generate_matrix(row,column,matrix_panel);
+                    c.gridx=1;c.gridy=1;
+                    main_panel.add(matrix_panel,c);
+                    frame.revalidate();
+                                     
+                }
+                
+            }
+            else if(click_event.getSource() == RowSizeDownJButton){
+                if(row>1){
+                    row--;
+                    main_panel.remove(matrix_panel);
+                    generate_matrix(row,column,matrix_panel);
+                    c.gridx=1;c.gridy=1;
+                    main_panel.add(matrix_panel,c);
+                    frame.revalidate();
+                                     
+                }
+                
+            }
+            else if(click_event.getSource() == ColumnSizeUpJButton){
+                if(column<10){
+                    column++;
+                    main_panel.remove(matrix_panel);
+                    generate_matrix(row,column,matrix_panel);
+                    c.gridx=1;c.gridy=1;
+                    main_panel.add(matrix_panel,c);
+                    frame.revalidate();
+                                     
+                }
+                
+            }
+            else if(click_event.getSource() == ColumnSizeDownJButton){
+                if(column>1){
+                    column--;
+                    main_panel.remove(matrix_panel);
+                    generate_matrix(row,column,matrix_panel);
+                    c.gridx=1;c.gridy=1;
+                    main_panel.add(matrix_panel,c);
+                    frame.revalidate();
+                                     
+                }
+                
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Pls input only float");
+            JOptionPane.showMessageDialog(null, "Pls input only float"+e);
         }
         
     }
