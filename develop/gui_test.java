@@ -1,7 +1,11 @@
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.FileChooserUI;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileFilter;
 public class gui_test{
     public static void main(String[] arngs)
     {   
@@ -11,7 +15,7 @@ public class gui_test{
     }
 }
 
-class gui_first_page_test implements ActionListener{
+/*class gui_first_page_test implements ActionListener{
     JLabel in_put_matrix_label = new JLabel("Input Matrix Size");
     JLabel row_label = new JLabel("Row Size");
     JLabel column_label = new JLabel("Column Size");
@@ -86,17 +90,17 @@ class gui_first_page_test implements ActionListener{
     }
 
 }
-
-class gui_second_page_test implements ActionListener{
-    JButton RowSizeUpJButton =new JButton("Row Size Up");
-    JButton RowSizeDownJButton =new JButton("Row Size Down");
-    JButton ColumnSizeUpJButton =new JButton("Column Size Up");
-    JButton ColumnSizeDownJButton =new JButton("Column Size Down");
+*/
+class gui_second_page_test extends javax.swing.JFrame implements ActionListener{ //เพิ่มให้ class extends javax.swing.JFrame 
+    JButton RowSizeUpJButton =new JButton();
+    JButton RowSizeDownJButton =new JButton();
+    JButton ColumnSizeUpJButton =new JButton();
+    JButton ColumnSizeDownJButton =new JButton();
     JTextField matrix_textfield[][]= new JTextField[10][10];
-    JButton rem_Button=new JButton("rem check");
-    JButton rrem_Button=new JButton("rrem check"); 
-    JButton reset_Button =new JButton("reset matrix");
-    JButton fill_zero_Button =new JButton("fill empty matix with 0");
+    JButton rem_Button=new JButton();
+    JButton rrem_Button=new JButton(); 
+    JButton reset_Button =new JButton();
+    JButton fill_zero_Button =new JButton();
     int row,column;
 
     JFrame frame =new JFrame();
@@ -112,7 +116,35 @@ class gui_second_page_test implements ActionListener{
     gui_second_page_test(int row,int column){
         this.row=row;
         this.column=column;
+        
+        ///////////////////////////////////////////////////////////////////////////////////////////////////// ทำให้ปุ่มใช้ feature ที่มีใน  javax.swing มาใช้
+        RowSizeUpJButton =new javax.swing.JButton();
+        RowSizeDownJButton =new javax.swing.JButton();
+        ColumnSizeUpJButton =new javax.swing.JButton();
+        ColumnSizeDownJButton =new javax.swing.JButton();
+        rem_Button=new javax.swing.JButton("rem check");
+        rrem_Button=new javax.swing.JButton("rrem check");
+        reset_Button =new javax.swing.JButton("reset matrix");
+        fill_zero_Button =new javax.swing.JButton("fill empty matix with 0");
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
+
+        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up.png")));
+        RowSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down.png")));
+        RowSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/right.png")));
+        ColumnSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/left.png")));
+        ColumnSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        
+        rem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        rrem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        reset_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        fill_zero_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+       
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+       
         container.setLayout(new BorderLayout());
 
         //////////////////////////////////////////////////////ทำ panel ย่อย
@@ -158,18 +190,19 @@ class gui_second_page_test implements ActionListener{
         c.gridx=1;c.gridy=3;
         main_panel.add(button_panel,c);
 
-        c.gridx=1;c.gridy=1;
-        top_panel.add(RowSizeUpJButton,c);
         c.gridx=1;c.gridy=2;
-        top_panel.add(RowSizeDownJButton,c);
-        c.gridx=2;c.gridy=1;
-        top_panel.add(ColumnSizeUpJButton,c);
+        top_panel.add(RowSizeUpJButton,c);
         c.gridx=2;c.gridy=2;
+        top_panel.add(RowSizeDownJButton,c);
+        c.gridx=4;c.gridy=2;
+        top_panel.add(ColumnSizeUpJButton,c);
+        c.gridx=3;c.gridy=2;
         top_panel.add(ColumnSizeDownJButton,c);
         //////////////////////////////////////////////////////
 
         container.add(top_panel,BorderLayout.NORTH);
-        container.add(main_panel,BorderLayout.CENTER);
+        //container.add(matrix_panel,BorderLayout.CENTER); ทำให้สวยขึ้นได้ แต่ยังมีบัค
+        container.add(main_panel,BorderLayout.SOUTH);
 
         fill_zero_Button.addActionListener(this);
         reset_Button.addActionListener(this);
