@@ -205,8 +205,8 @@ class gui_second_page_test implements ActionListener{
         matrix_operation_develop m_o=new matrix_operation_develop(row, column);
         try {
             if(click_event.getSource() == reset_Button){
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
                         matrix_textfield[(i*column)+l].setText("");
                 }
             }
@@ -230,8 +230,8 @@ class gui_second_page_test implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Reduce Row Echelon Matrix : "+m_o.check_reduce_row_echelon_matrix(matrix));
             }    
             else if(click_event.getSource() == fill_zero_Button){
-                for(int i=0;i<column;i++){
-                    for(int l=0;l<row;l++){ 
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){ 
                         if((matrix_textfield[(i*column)+l].getText().isBlank())){
                             matrix_textfield[(i*column)+l].setText("0");
                         }
@@ -242,10 +242,8 @@ class gui_second_page_test implements ActionListener{
                 if(row<10){
                     matrix_panel.setLayout(new GridBagLayout());
                     row++;
-                    //main_panel.remove(matrix_panel);
+                    matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
-                    //c.gridx=1;c.gridy=1;
-                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
@@ -255,10 +253,8 @@ class gui_second_page_test implements ActionListener{
                 if(row>1){
                     matrix_panel.setLayout(new GridBagLayout());
                     row--;
-                    //main_panel.remove(matrix_panel);
+                    matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
-                    //c.gridx=1;c.gridy=1;
-                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
@@ -268,10 +264,8 @@ class gui_second_page_test implements ActionListener{
                 if(column<10){
                     matrix_panel.setLayout(new GridBagLayout());
                     column++;
-                    //main_panel.remove(matrix_panel);
+                    matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
-                    //c.gridx=1;c.gridy=1;
-                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
@@ -281,10 +275,8 @@ class gui_second_page_test implements ActionListener{
                 if(column>1){
                     matrix_panel.setLayout(new GridBagLayout());
                     column--;
-                    //main_panel.remove(matrix_panel);
+                    matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
-                    //c.gridx=1;c.gridy=1;
-                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
