@@ -91,7 +91,7 @@ class gui_second_page_test implements ActionListener{
     JButton RowSizeUpJButton =new JButton("Row Size Up");
     JButton RowSizeDownJButton =new JButton("Row Size Down");
     JButton ColumnSizeUpJButton =new JButton("Column Size Up");
-    JButton ColumnSizeDownJButton =new JButton("Row Size Down");
+    JButton ColumnSizeDownJButton =new JButton("Column Size Down");
     JTextField matrix_textfield[]= new JTextField[100];
     JButton rem_Button=new JButton("rem check");
     JButton rrem_Button=new JButton("rrem check"); 
@@ -187,6 +187,7 @@ class gui_second_page_test implements ActionListener{
     }
 
     public void generate_matrix(int row ,int column,JPanel matrix_panel){
+        matrix_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets=new Insets (5,5,5,5);
         int n=0;
@@ -198,7 +199,7 @@ class gui_second_page_test implements ActionListener{
             }
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent click_event) {
         matrix_operation_develop m_o=new matrix_operation_develop(row, column);
@@ -239,11 +240,12 @@ class gui_second_page_test implements ActionListener{
             }
             else if(click_event.getSource() == RowSizeUpJButton){
                 if(row<10){
+                    matrix_panel.setLayout(new GridBagLayout());
                     row++;
-                    main_panel.remove(matrix_panel);
+                    //main_panel.remove(matrix_panel);
                     generate_matrix(row,column,matrix_panel);
-                    c.gridx=1;c.gridy=1;
-                    main_panel.add(matrix_panel,c);
+                    //c.gridx=1;c.gridy=1;
+                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
@@ -251,11 +253,12 @@ class gui_second_page_test implements ActionListener{
             }
             else if(click_event.getSource() == RowSizeDownJButton){
                 if(row>1){
+                    matrix_panel.setLayout(new GridBagLayout());
                     row--;
-                    main_panel.remove(matrix_panel);
+                    //main_panel.remove(matrix_panel);
                     generate_matrix(row,column,matrix_panel);
-                    c.gridx=1;c.gridy=1;
-                    main_panel.add(matrix_panel,c);
+                    //c.gridx=1;c.gridy=1;
+                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
@@ -263,11 +266,12 @@ class gui_second_page_test implements ActionListener{
             }
             else if(click_event.getSource() == ColumnSizeUpJButton){
                 if(column<10){
+                    matrix_panel.setLayout(new GridBagLayout());
                     column++;
-                    main_panel.remove(matrix_panel);
+                    //main_panel.remove(matrix_panel);
                     generate_matrix(row,column,matrix_panel);
-                    c.gridx=1;c.gridy=1;
-                    main_panel.add(matrix_panel,c);
+                    //c.gridx=1;c.gridy=1;
+                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
@@ -275,16 +279,20 @@ class gui_second_page_test implements ActionListener{
             }
             else if(click_event.getSource() == ColumnSizeDownJButton){
                 if(column>1){
+                    matrix_panel.setLayout(new GridBagLayout());
                     column--;
-                    main_panel.remove(matrix_panel);
+                    //main_panel.remove(matrix_panel);
                     generate_matrix(row,column,matrix_panel);
-                    c.gridx=1;c.gridy=1;
-                    main_panel.add(matrix_panel,c);
+                    //c.gridx=1;c.gridy=1;
+                    //main_panel.add(matrix_panel,c);
                     frame.revalidate();
                                      
                 }
                 
             }
+            System.out.println("row="+row);
+            System.out.println("column="+column);
+            System.out.println("-------------------------");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Pls input only float"+e);
         }
