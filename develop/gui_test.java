@@ -111,6 +111,7 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
     JPanel button_panel = new JPanel();
     JPanel top_panel = new JPanel();
 
+    JPanel matrix_panel_center = new JPanel();
     GridBagConstraints c = new GridBagConstraints();
 
     gui_second_page_test(int row,int column){
@@ -128,14 +129,14 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         fill_zero_Button =new javax.swing.JButton("fill empty matix with 0");
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
-
-        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up.png")));
+        
+        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("up.png")));
         RowSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down.png")));
+        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("down.png")));
         RowSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/right.png")));
+        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("right.png")));
         ColumnSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/left.png")));
+        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("left.png")));
         ColumnSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         
         rem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
@@ -155,6 +156,8 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         button_panel.setLayout(new GridBagLayout());
 
         top_panel.setLayout(new GridBagLayout());
+
+        matrix_panel_center.setLayout(new GridBagLayout());
         //////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////สร้างช่อง matrix
@@ -183,8 +186,12 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         c.gridx=3;c.gridy=1;
         button_panel.add(rrem_Button,c);
 
+        /* 
         c.gridx=1;c.gridy=1;
-        main_panel.add(matrix_panel,c);
+        main_panel.add(matrix_panel,c);*/
+        c.gridx=1;c.gridy=1;
+        matrix_panel_center.add(matrix_panel,c);
+
         c.gridx=1;c.gridy=2;
         main_panel.add(fill_zero_Button,c);
         c.gridx=1;c.gridy=3;
@@ -201,7 +208,7 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         //////////////////////////////////////////////////////
 
         container.add(top_panel,BorderLayout.NORTH);
-        //container.add(matrix_panel,BorderLayout.CENTER); ทำให้สวยขึ้นได้ แต่ยังมีบัค
+        container.add(matrix_panel_center,BorderLayout.CENTER); //ทำให้สวยขึ้นได้ แต่ยังมีบัค
         container.add(main_panel,BorderLayout.SOUTH);
 
         fill_zero_Button.addActionListener(this);
