@@ -112,6 +112,9 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
     JPanel top_panel = new JPanel();
 
     JPanel matrix_panel_center = new JPanel();
+    JTextField row_sizeJTextField = new JTextField("",3);
+    JTextField column_sizeJTextField = new JTextField("",3);
+    JButton enter_matrix_size_JButton = new JButton("Enter Matrix Size");
     GridBagConstraints c = new GridBagConstraints();
 
     gui_second_page_test(int row,int column){
@@ -197,14 +200,26 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         c.gridx=1;c.gridy=3;
         main_panel.add(button_panel,c);
 
-        c.gridx=1;c.gridy=2;
+        c.gridx=2;c.gridy=1;
         top_panel.add(RowSizeUpJButton,c);
         c.gridx=2;c.gridy=2;
         top_panel.add(RowSizeDownJButton,c);
-        c.gridx=4;c.gridy=2;
+        c.gridx=6;c.gridy=1;
         top_panel.add(ColumnSizeUpJButton,c);
-        c.gridx=3;c.gridy=2;
+        c.gridx=5;c.gridy=1;
         top_panel.add(ColumnSizeDownJButton,c);
+
+        c.gridx=1;c.gridy=1;
+        top_panel.add(row_sizeJTextField,c);
+        row_sizeJTextField.setText(row+"");
+
+        c.gridx=4;c.gridy=1;
+        top_panel.add(column_sizeJTextField,c);
+        column_sizeJTextField.setText(column+"");
+
+        c.gridx=3;c.gridy=1;
+        top_panel.add(enter_matrix_size_JButton,c);
+        
         //////////////////////////////////////////////////////
 
         container.add(top_panel,BorderLayout.NORTH);
@@ -220,6 +235,8 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         RowSizeDownJButton.addActionListener(this);
         ColumnSizeUpJButton.addActionListener(this);
         ColumnSizeDownJButton.addActionListener(this);
+
+        enter_matrix_size_JButton.addActionListener(this);
 
         frame.setSize(500,550);
         frame.setVisible(true);
@@ -300,7 +317,8 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
                     matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
                     frame.revalidate();
-                                     
+                    row_sizeJTextField.setText(row+"");  
+                    column_sizeJTextField.setText(column+"");               
                 }
                 
             }
@@ -311,7 +329,8 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
                     matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
                     frame.revalidate();
-                                     
+                    row_sizeJTextField.setText(row+"");  
+                    column_sizeJTextField.setText(column+"");                  
                 }
                 
             }
@@ -322,7 +341,8 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
                     matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
                     frame.revalidate();
-                                     
+                    row_sizeJTextField.setText(row+"");  
+                    column_sizeJTextField.setText(column+"");                  
                 }
                 
             }
@@ -333,15 +353,25 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
                     matrix_panel.removeAll();
                     generate_matrix(row,column,matrix_panel);
                     frame.revalidate();
-                                     
+                    row_sizeJTextField.setText(row+"");  
+                    column_sizeJTextField.setText(column+"");                 
                 }
                 
             }
-            //System.out.println("row="+row);
-            //System.out.println("column="+column);
-            //System.out.println("-------------------------");
+            else if(click_event.getSource()==enter_matrix_size_JButton){
+                if(Integer.parseInt(column_sizeJTextField.getText())>=1&&Integer.parseInt(column_sizeJTextField.getText())<=10
+                &&Integer.parseInt(row_sizeJTextField.getText())>=1&&Integer.parseInt(row_sizeJTextField.getText())<=10){
+                    matrix_panel.setLayout(new GridBagLayout());
+                    column=Integer.parseInt(column_sizeJTextField.getText());
+                    row=Integer.parseInt(row_sizeJTextField.getText());
+                    matrix_panel.removeAll();
+                    generate_matrix(row,column,matrix_panel);
+                    frame.revalidate();
+                }
+                
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Pls input only float"+e);
+            JOptionPane.showMessageDialog(null, "Pls input only float"/*+e*/);
         }
         
     }
