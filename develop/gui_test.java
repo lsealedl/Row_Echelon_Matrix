@@ -368,6 +368,7 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
                     generate_matrix(row,column,matrix_panel);
                     frame.revalidate();
                 }
+                else{JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to 10");}
                 
             }
         } catch (Exception e) {
