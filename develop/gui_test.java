@@ -146,6 +146,9 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         rrem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
         reset_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
         fill_zero_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+
+        row_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
+        column_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
        
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
        
@@ -165,9 +168,9 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
 
         //////////////////////////////////////////////////////สร้างช่อง matrix
         for(int i=0;i<10;i++){
-            for(int l=0;l<10;l++)
-            matrix_textfield[i][l]=new JTextField("",3);
-            //matrix_textfield[i][l].setHorizontalAlignment(SwingConstants.CENTER);
+            for(int l=0;l<10;l++){
+                matrix_textfield[i][l]=new JTextField("",3);
+                matrix_textfield[i][l].setHorizontalAlignment(SwingConstants.CENTER);}
         }
         //////////////////////////////////////////////////////
 
@@ -271,6 +274,14 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
             matrix_textfield[n].setText("");
         }*/
     }
+    public void reload_matrix(){
+        matrix_panel.setLayout(new GridBagLayout());
+        matrix_panel.removeAll();
+        generate_matrix(row,column,matrix_panel);
+        frame.revalidate();
+        row_sizeJTextField.setText(row+"");  
+        column_sizeJTextField.setText(column+"");    
+    }
     
     @Override
     public void actionPerformed(ActionEvent click_event) {
@@ -312,61 +323,38 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
             }
             else if(click_event.getSource() == RowSizeUpJButton){
                 if(row<10){
-                    matrix_panel.setLayout(new GridBagLayout());
                     row++;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                    row_sizeJTextField.setText(row+"");  
-                    column_sizeJTextField.setText(column+"");               
+                    reload_matrix();        
                 }
                 
             }
             else if(click_event.getSource() == RowSizeDownJButton){
                 if(row>1){
-                    matrix_panel.setLayout(new GridBagLayout());
                     row--;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                    row_sizeJTextField.setText(row+"");  
-                    column_sizeJTextField.setText(column+"");                  
+                    reload_matrix();                
                 }
                 
             }
             else if(click_event.getSource() == ColumnSizeUpJButton){
                 if(column<10){
-                    matrix_panel.setLayout(new GridBagLayout());
                     column++;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                    row_sizeJTextField.setText(row+"");  
-                    column_sizeJTextField.setText(column+"");                  
+                    reload_matrix();                  
                 }
                 
             }
             else if(click_event.getSource() == ColumnSizeDownJButton){
                 if(column>1){
-                    matrix_panel.setLayout(new GridBagLayout());
                     column--;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                    row_sizeJTextField.setText(row+"");  
-                    column_sizeJTextField.setText(column+"");                 
+                    reload_matrix();               
                 }
                 
             }
             else if(click_event.getSource()==enter_matrix_size_JButton){
                 if(Integer.parseInt(column_sizeJTextField.getText())>=1&&Integer.parseInt(column_sizeJTextField.getText())<=10
                 &&Integer.parseInt(row_sizeJTextField.getText())>=1&&Integer.parseInt(row_sizeJTextField.getText())<=10){
-                    matrix_panel.setLayout(new GridBagLayout());
                     column=Integer.parseInt(column_sizeJTextField.getText());
                     row=Integer.parseInt(row_sizeJTextField.getText());
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
+                    reload_matrix();
                 }
                 else{JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to 10");}
                 
