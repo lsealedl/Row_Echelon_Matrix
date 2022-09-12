@@ -201,7 +201,7 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         //////////////////////////////////////////////////////
 
         container.add(top_panel,BorderLayout.NORTH);
-        //container.add(matrix_panel,BorderLayout.CENTER); ทำให้สวยขึ้นได้ แต่ยังมีบัค
+       // container.add(matrix_panel,BorderLayout.CENTER);// ทำให้สวยขึ้นได้ แต่ยังมีบัค
         container.add(main_panel,BorderLayout.SOUTH);
 
         fill_zero_Button.addActionListener(this);
