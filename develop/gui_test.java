@@ -111,6 +111,10 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
     JPanel button_panel = new JPanel();
     JPanel top_panel = new JPanel();
 
+    JPanel matrix_panel_center = new JPanel();
+    JTextField row_sizeJTextField = new JTextField("",3);
+    JTextField column_sizeJTextField = new JTextField("",3);
+    JButton enter_matrix_size_JButton = new JButton("Enter Matrix Size");
     GridBagConstraints c = new GridBagConstraints();
 
     gui_second_page_test(int row,int column){
@@ -128,20 +132,23 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         fill_zero_Button =new javax.swing.JButton("fill empty matix with 0");
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
-
-        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up.png")));
+        
+        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("up.png")));
         RowSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down.png")));
+        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("down.png")));
         RowSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/right.png")));
+        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("right.png")));
         ColumnSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/left.png")));
+        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("left.png")));
         ColumnSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         
         rem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
         rrem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
         reset_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
         fill_zero_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+
+        row_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
+        column_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
        
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
        
@@ -155,13 +162,15 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         button_panel.setLayout(new GridBagLayout());
 
         top_panel.setLayout(new GridBagLayout());
+
+        matrix_panel_center.setLayout(new GridBagLayout());
         //////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////สร้างช่อง matrix
         for(int i=0;i<10;i++){
-            for(int l=0;l<10;l++)
-            matrix_textfield[i][l]=new JTextField("",3);
-            //matrix_textfield[i][l].setHorizontalAlignment(SwingConstants.CENTER);
+            for(int l=0;l<10;l++){
+                matrix_textfield[i][l]=new JTextField("",3);
+                matrix_textfield[i][l].setHorizontalAlignment(SwingConstants.CENTER);}
         }
         //////////////////////////////////////////////////////
 
@@ -183,25 +192,44 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         c.gridx=3;c.gridy=1;
         button_panel.add(rrem_Button,c);
 
+        /* 
         c.gridx=1;c.gridy=1;
-        main_panel.add(matrix_panel,c);
+        main_panel.add(matrix_panel,c);*/
+        c.gridx=1;c.gridy=1;
+        matrix_panel_center.add(matrix_panel,c);
+
         c.gridx=1;c.gridy=2;
         main_panel.add(fill_zero_Button,c);
         c.gridx=1;c.gridy=3;
         main_panel.add(button_panel,c);
 
-        c.gridx=1;c.gridy=2;
+        c.gridx=2;c.gridy=1;
         top_panel.add(RowSizeUpJButton,c);
         c.gridx=2;c.gridy=2;
         top_panel.add(RowSizeDownJButton,c);
-        c.gridx=4;c.gridy=2;
+        c.gridx=6;c.gridy=1;
         top_panel.add(ColumnSizeUpJButton,c);
-        c.gridx=3;c.gridy=2;
+        c.gridx=5;c.gridy=1;
         top_panel.add(ColumnSizeDownJButton,c);
+
+        c.gridx=1;c.gridy=1;
+        top_panel.add(row_sizeJTextField,c);
+        row_sizeJTextField.setText(row+"");
+
+        c.gridx=4;c.gridy=1;
+        top_panel.add(column_sizeJTextField,c);
+        column_sizeJTextField.setText(column+"");
+
+        c.gridx=3;c.gridy=1;
+        top_panel.add(enter_matrix_size_JButton,c);
+        
         //////////////////////////////////////////////////////
 
         container.add(top_panel,BorderLayout.NORTH);
-       // container.add(matrix_panel,BorderLayout.CENTER);// ทำให้สวยขึ้นได้ แต่ยังมีบัค
+
+
+        container.add(matrix_panel_center,BorderLayout.CENTER); //ทำให้สวยขึ้นได้ แต่ยังมีบัค
+
         container.add(main_panel,BorderLayout.SOUTH);
 
         fill_zero_Button.addActionListener(this);
@@ -213,6 +241,8 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         RowSizeDownJButton.addActionListener(this);
         ColumnSizeUpJButton.addActionListener(this);
         ColumnSizeDownJButton.addActionListener(this);
+
+        enter_matrix_size_JButton.addActionListener(this);
 
         frame.setSize(500,550);
         frame.setVisible(true);
@@ -246,6 +276,14 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
         for(int i=n+1;i<100;i++){
             matrix_textfield[n].setText("");
         }*/
+    }
+    public void reload_matrix(){
+        matrix_panel.setLayout(new GridBagLayout());
+        matrix_panel.removeAll();
+        generate_matrix(row,column,matrix_panel);
+        frame.revalidate();
+        row_sizeJTextField.setText(row+"");  
+        column_sizeJTextField.setText(column+"");    
     }
     
     @Override
@@ -288,53 +326,44 @@ class gui_second_page_test extends javax.swing.JFrame implements ActionListener{
             }
             else if(click_event.getSource() == RowSizeUpJButton){
                 if(row<10){
-                    matrix_panel.setLayout(new GridBagLayout());
                     row++;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                                     
+                    reload_matrix();        
                 }
                 
             }
             else if(click_event.getSource() == RowSizeDownJButton){
                 if(row>1){
-                    matrix_panel.setLayout(new GridBagLayout());
                     row--;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                                     
+                    reload_matrix();                
                 }
                 
             }
             else if(click_event.getSource() == ColumnSizeUpJButton){
                 if(column<10){
-                    matrix_panel.setLayout(new GridBagLayout());
                     column++;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                                     
+                    reload_matrix();                  
                 }
                 
             }
             else if(click_event.getSource() == ColumnSizeDownJButton){
                 if(column>1){
-                    matrix_panel.setLayout(new GridBagLayout());
                     column--;
-                    matrix_panel.removeAll();
-                    generate_matrix(row,column,matrix_panel);
-                    frame.revalidate();
-                                     
+                    reload_matrix();               
                 }
                 
             }
-            //System.out.println("row="+row);
-            //System.out.println("column="+column);
-            //System.out.println("-------------------------");
+            else if(click_event.getSource()==enter_matrix_size_JButton){
+                if(Integer.parseInt(column_sizeJTextField.getText())>=1&&Integer.parseInt(column_sizeJTextField.getText())<=10
+                &&Integer.parseInt(row_sizeJTextField.getText())>=1&&Integer.parseInt(row_sizeJTextField.getText())<=10){
+                    column=Integer.parseInt(column_sizeJTextField.getText());
+                    row=Integer.parseInt(row_sizeJTextField.getText());
+                    reload_matrix();
+                }
+                else{JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to 10");}
+                
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Pls input only float"+e);
+            JOptionPane.showMessageDialog(null, "Pls input only float"/*+e*/);
         }
         
     }
