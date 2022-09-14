@@ -147,7 +147,7 @@ public class test_case {
             0,
             1
         };
-        test.use(5, 1, array18, true, false);
+        test.use(5, 1, array18, false, false);
         
         System.out.println("ข้อ 19");
         float[] array19={

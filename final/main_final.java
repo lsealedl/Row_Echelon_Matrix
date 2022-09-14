@@ -281,7 +281,7 @@ class gui_final extends javax.swing.JFrame implements ActionListener{ //เพ�
                 
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Pls input only float"/*+e*/);
+            JOptionPane.showMessageDialog(null, "Pls Input Only Integer"/*+e*/);
         }
         
     }
