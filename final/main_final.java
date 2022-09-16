@@ -161,8 +161,8 @@ class gui_final extends javax.swing.JFrame implements ActionListener{ //เพ�
         ColumnSizeDownJButton.addActionListener(this);
 
         enter_matrix_size_JButton.addActionListener(this);
-
-        frame.setSize(500,550);
+        frame.pack();
+        //frame.setSize(500,550);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -202,6 +202,7 @@ class gui_final extends javax.swing.JFrame implements ActionListener{ //เพ�
         frame.revalidate();
         row_sizeJTextField.setText(row+"");  
         column_sizeJTextField.setText(column+"");    
+        frame.pack();
     }
     
     @Override
