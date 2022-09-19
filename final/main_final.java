@@ -5,37 +5,39 @@ import java.awt.event.*;
 public class main_final{
     public static void main(String[] arngs)
     {   
-        new gui_final(1,1);
+        new gui(1,1);
     }
 }
 
-class gui_final extends javax.swing.JFrame implements ActionListener{ //เพิ่มให้ class extends javax.swing.JFrame 
-    JButton RowSizeUpJButton =new JButton();
-    JButton RowSizeDownJButton =new JButton();
-    JButton ColumnSizeUpJButton =new JButton();
-    JButton ColumnSizeDownJButton =new JButton();
-    JTextField matrix_textfield[][]= new JTextField[10][10];
-    JButton rem_Button=new JButton();
-    JButton rrem_Button=new JButton(); 
-    JButton reset_Button =new JButton();
-    JButton fill_zero_Button =new JButton();
-    int row,column;
+class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่มให้ class extends javax.swing.JFrame 
+    private JButton RowSizeUpJButton =new JButton();
+    private JButton RowSizeDownJButton =new JButton();
+    private JButton ColumnSizeUpJButton =new JButton();
+    private JButton ColumnSizeDownJButton =new JButton();
+    private JTextField matrix_textfield[][]= new JTextField[10][10];
+    private JButton rem_Button=new JButton();
+    private JButton rrem_Button=new JButton(); 
+    private JButton reset_Button =new JButton();
+    private JButton fill_zero_Button =new JButton();
+    private int row,column;
 
     JFrame frame =new JFrame();
     Container container = frame.getContentPane();
 
-    JPanel main_panel = new JPanel();
-    JPanel matrix_panel = new JPanel();
-    JPanel button_panel = new JPanel();
-    JPanel top_panel = new JPanel();
+    private JPanel main_panel = new JPanel();
+    private JPanel matrix_panel = new JPanel();
+    private JPanel button_panel = new JPanel();
+    private JPanel top_panel = new JPanel();
 
-    JPanel matrix_panel_center = new JPanel();
-    JTextField row_sizeJTextField = new JTextField("",3);
-    JTextField column_sizeJTextField = new JTextField("",3);
-    JButton enter_matrix_size_JButton = new JButton("Enter Matrix Size");
+    private JPanel matrix_panel_center = new JPanel();
+    private JTextField row_sizeJTextField = new JTextField("",3);
+    private JTextField column_sizeJTextField = new JTextField("",3);
+    private JButton enter_matrix_size_JButton = new JButton("Enter Matrix Size");
     GridBagConstraints c = new GridBagConstraints();
 
-    gui_final(int row,int column){
+    private int frame_width;
+
+    gui(int row,int column){
         this.row=row;
         this.column=column;
         
@@ -166,6 +168,7 @@ class gui_final extends javax.swing.JFrame implements ActionListener{ //เพ�
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame_width=frame.getWidth();
     }
 
     public void generate_matrix(int row ,int column,JPanel matrix_panel){
@@ -203,6 +206,11 @@ class gui_final extends javax.swing.JFrame implements ActionListener{ //เพ�
         row_sizeJTextField.setText(row+"");  
         column_sizeJTextField.setText(column+"");    
         frame.pack();
+
+        Point frame_location=frame.getLocation();
+        frame.setLocation((int)frame_location.getX()-(frame.getWidth()-frame_width)/2, (int)frame_location.getY());
+
+        frame_width=frame.getWidth();
     }
     
     @Override
