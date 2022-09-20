@@ -10,11 +10,13 @@ public class main_final{
 }
 
 class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่มให้ class extends javax.swing.JFrame 
+    private int max=15;
+
     private JButton RowSizeUpJButton =new JButton();
     private JButton RowSizeDownJButton =new JButton();
     private JButton ColumnSizeUpJButton =new JButton();
     private JButton ColumnSizeDownJButton =new JButton();
-    private JTextField matrix_textfield[][]= new JTextField[10][10];
+    private JTextField matrix_textfield[][]= new JTextField[max][max];
     private JButton rem_Button=new JButton();
     private JButton rrem_Button=new JButton(); 
     private JButton reset_Button =new JButton();
@@ -87,8 +89,8 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
         //////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////สร้างช่อง matrix
-        for(int i=0;i<10;i++){
-            for(int l=0;l<10;l++){
+        for(int i=0;i<max;i++){
+            for(int l=0;l<max;l++){
                 matrix_textfield[i][l]=new JTextField("",3);
                 matrix_textfield[i][l].setHorizontalAlignment(SwingConstants.CENTER);}
         }
@@ -175,14 +177,14 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
         matrix_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets=new Insets (5,5,5,5);
-        for(int i=row;i<10;i++){
-            for(int l=0;l<10;l++){
+        for(int i=row;i<max;i++){
+            for(int l=0;l<max;l++){
                 matrix_textfield[i][l].setText("");
             }
         }
         
-        for(int i=0;i<10;i++){
-            for(int l=column;l<10;l++){
+        for(int i=0;i<max;i++){
+            for(int l=column;l<max;l++){
                 matrix_textfield[i][l].setText("");
             }
         }
@@ -252,7 +254,7 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
                 }
             }
             else if(click_event.getSource() == RowSizeUpJButton){
-                if(row<10){
+                if(row<max){
                     row++;
                     reload_matrix();        
                 }
@@ -266,7 +268,7 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
                 
             }
             else if(click_event.getSource() == ColumnSizeUpJButton){
-                if(column<10){
+                if(column<max){
                     column++;
                     reload_matrix();                  
                 }
@@ -280,13 +282,13 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
                 
             }
             else if(click_event.getSource()==enter_matrix_size_JButton){
-                if(Integer.parseInt(column_sizeJTextField.getText())>=1&&Integer.parseInt(column_sizeJTextField.getText())<=10
-                &&Integer.parseInt(row_sizeJTextField.getText())>=1&&Integer.parseInt(row_sizeJTextField.getText())<=10){
+                if(Integer.parseInt(column_sizeJTextField.getText())>=1&&Integer.parseInt(column_sizeJTextField.getText())<=max
+                &&Integer.parseInt(row_sizeJTextField.getText())>=1&&Integer.parseInt(row_sizeJTextField.getText())<=max){
                     column=Integer.parseInt(column_sizeJTextField.getText());
                     row=Integer.parseInt(row_sizeJTextField.getText());
                     reload_matrix();
                 }
-                else{JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to 10");}
+                else{JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to "+max);}
                 
             }
         } catch (Exception e) {
