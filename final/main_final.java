@@ -441,8 +441,7 @@ class matrix_operation implements matrix_operation_template{
         }
         return true;
     }
-
-    
+   
     public boolean check_reduce_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น reduce row echelon matrix เปล่า
         matrix_operation m_o=new matrix_operation(rows,columns);
         if(m_o.check_row_echelon_matrix(matrix)){//เช็คว่าเป็น rem เปล่าถ้าไม่เป็นก็ไม่มีทางเป็น rrem ได้
