@@ -1,4 +1,3 @@
-import javax.print.FlavorException;
 
 public class test_case {
     public static void main(String[] arngs){
@@ -221,7 +220,7 @@ public class test_case {
         };
         test.use_check_rem_rrem(3,4,array_rrem_1);
         
-        
+       /* 
         System.out.println("ข้อ 2");
         float[] array_rrem_2={
           1,
@@ -237,7 +236,7 @@ public class test_case {
           3,6
         };
         test.use_check_rem_rrem(3,2,array_rrem_3);
-
+        /*
         System.out.println("ข้อ 4");
         float[] array_rrem_4={
           1,-3,0,-1,0,-1,
@@ -246,8 +245,16 @@ public class test_case {
           -1,3,2,5,1,6
         };
         test.use_check_rem_rrem(4,6,array_rrem_4);
-
-
+        */
+        /* 
+        System.out.println("ข้อ 5");
+        float[] array_rrem_5={
+          0,1,
+          2,4,
+          3,6
+        };
+        test.use_check_rem_rrem(3,2,array_rrem_5);
+        */
     }
     
 }
@@ -273,6 +280,7 @@ class test_case_tool{
         System.out.println();
     }
     void use_check_rrem(int rows,int columns,float[] array){
+        String method="";
         matrix_operation_develop m = new matrix_operation_develop(rows,columns);
         float[][] matrix=new float[rows][columns];
         for(int i=0;i<rows;i++){
@@ -282,11 +290,12 @@ class test_case_tool{
         }
         //m.print_matrix(matrix);
         System.out.println("__________________________________________________________");
-        m.rrem(matrix);
+        m.rrem(matrix,method);
         m.print_matrix(matrix);
         System.out.println("__________________________________________________________");
     }
     void use_check_rem(int rows,int columns,float[] array){
+        String method="";
         matrix_operation_develop m = new matrix_operation_develop(rows,columns);
         float[][] matrix=new float[rows][columns];
         for(int i=0;i<rows;i++){
@@ -296,36 +305,41 @@ class test_case_tool{
         }
         //m.print_matrix(matrix);
         System.out.println("__________________________________________________________");
-        m.rem(matrix);
+        m.rem(matrix,method);
         m.print_matrix(matrix);
         System.out.println("__________________________________________________________");
     }
     void use_check_rem_rrem(int rows,int columns,float[] array){
-        test_case_tool t=new test_case_tool();
-        
+        String text1="",text2="";
         matrix_operation_develop m = new matrix_operation_develop(rows,columns);
-        float[][] matrix=new float[rows][columns];
+        float[][] matrix_1=new float[rows][columns];
+        float[][] matrix_2=new float[rows][columns];
         for(int i=0;i<rows;i++){
             for(int l=0;l<columns;l++){
-                matrix[i][l]=array[(i*columns)+l];
+                matrix_1[i][l]=array[(i*columns)+l];
             }
         }
-        m.print_matrix(matrix);
+        for(int i=0;i<rows;i++){
+            for(int l=0;l<columns;l++){
+                matrix_2[i][l]=array[(i*columns)+l];
+            }
+        }
+        m.print_matrix(matrix_1);
         System.out.println();
         System.out.println("__________________________________________________________");
         
         System.out.println("rem : ");
-        m.rem(matrix);
-        m.print_matrix(matrix);
-        //System.out.println();
+        m.rem(matrix_1,text1);
+        m.print_matrix(matrix_1);
+
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+
         System.out.println("rrem : ");
-        m.rrem(matrix);
-        m.print_matrix(matrix);
+        m.rrem(matrix_2,text2);
+        m.print_matrix(matrix_2);
         System.out.println();
+
         System.out.println("__________________________________________________________");
-
-
     }
 }
 

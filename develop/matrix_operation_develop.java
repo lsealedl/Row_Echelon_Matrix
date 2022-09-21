@@ -1,5 +1,5 @@
 import java.util.*;
-
+import java.io.FileWriter; 
 interface matrix_operation_develop_template{
     boolean row_is_zero(float[][]matrix,int row);
     int leading_coefficient(float[][]matrix,int row);
@@ -64,6 +64,17 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
         return -1;
     }
     
+    String matrix_to_string(float[][] matrix){
+        String matrix_string="";
+        for(int i=0;i<rows;i++){
+            for(int l=0;l<columns;l++){
+                matrix_string=matrix_string+matrix[i][l]+" ";
+            }
+            matrix_string=matrix_string+"\n";
+        }
+        return matrix_string;
+    }
+
     public boolean check_row_echelon_matrix(float[][] matrix){//เช็คว่าเป็น row echelon matrix เปล่า
         matrix_operation_develop m_o=new matrix_operation_develop(rows,columns);
         if(rows==1){
@@ -137,23 +148,32 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
         }
     }
     
-    void rrem(float[][]matrix){
+    void rrem(float[][]matrix,String text){
         matrix_operation_develop m_o=new matrix_operation_develop(rows,columns);
         int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        String tmp="";
+        text="";
         for(int i=0;i<columns;i++){
             for(int l=0;l<rows;l++){
                 if(leading_coefficient_position_in_row!=-1){//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
                     //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
                     if(matrix[leading_coefficient_position_in_row][i]==1){
                         if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
-                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]);                            
+                            tmp="R"+(l+1)+"+("+(-matrix[l][i])+")R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]); 
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";                   
                         }
                     }
                     else if(matrix[l][i]!=0&&leading_coefficient_position_in_row<=l){//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
                         if(l!=leading_coefficient_position_in_row){//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
-                        m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);}
+                            tmp="R"+(l+1)+"↔R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
+                        }
                         if(matrix[leading_coefficient_position_in_row][i]!=1){//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            tmp="R"+(leading_coefficient_position_in_row+1)+"/"+matrix[leading_coefficient_position_in_row][i]+"\n\n";
                             m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
                         }
                         //System.out.println("2 rows = "+l);
                         l=-1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
@@ -169,6 +189,7 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
                     leading_coefficient_position_in_row=-1;
                 }
             }
+            
         }
 
         for(int i=0;i<columns;i++){
@@ -176,25 +197,42 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
                 if(matrix[l][i]==-0){matrix[l][i]=0;}
             }
         }
+
+        try {
+            FileWriter myWriter = new FileWriter("tmp.txt");
+            myWriter.write(text);
+            myWriter.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }      
     }
 
-    void rem(float[][]matrix){
+    void rem(float[][]matrix,String text){
         matrix_operation_develop m_o=new matrix_operation_develop(rows,columns);
         int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        String tmp="";
+        text="";
         for(int i=0;i<columns;i++){
             for(int l=0;l<rows;l++){
                 if(leading_coefficient_position_in_row!=-1){//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
                     //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
                     if(matrix[leading_coefficient_position_in_row][i]==1){
-                        if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0&&leading_coefficient_position_in_row<l){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือที่อยู่ข้างล่างหลักนั้นให้เป็น 0
-                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]);                            
+                        if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0&&leading_coefficient_position_in_row<l){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือที่อยู่ข้างล่างหลักนั้นให้เป็น 0     
+                            tmp="R"+(l+1)+"+("+(-matrix[l][i])+")R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]); 
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";                   
                         }
                     }
                     else if(matrix[l][i]!=0&&leading_coefficient_position_in_row<=l){//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
                         if(l!=leading_coefficient_position_in_row){//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
-                            m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);}
+                            tmp="R"+(l+1)+"↔R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
+                        }
                         if(matrix[leading_coefficient_position_in_row][i]!=1){//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            tmp="R"+(leading_coefficient_position_in_row+1)+"/"+matrix[leading_coefficient_position_in_row][i]+"\n\n";
                             m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
                         }
                         //System.out.println("2 rows = "+l);
                         l=-1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
@@ -210,6 +248,7 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
                     leading_coefficient_position_in_row=-1;
                 }
             }
+            
         }
 
         for(int i=0;i<columns;i++){
@@ -217,7 +256,13 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
                 if(matrix[l][i]==-0){matrix[l][i]=0;}
             }
         }
-    }
-    
 
+        try {
+            FileWriter myWriter = new FileWriter("rem_tmp.txt");
+            myWriter.write(text);
+            myWriter.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }      
+    }
 }

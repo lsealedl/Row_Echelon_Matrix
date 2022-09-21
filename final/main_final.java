@@ -2,6 +2,8 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileWriter;
 public class main_final{
     public static void main(String[] arngs)
     {   
@@ -10,7 +12,7 @@ public class main_final{
 }
 
 class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่มให้ class extends javax.swing.JFrame 
-    private int max=15;
+    private int max=10;
 
     private JButton RowSizeUpJButton =new JButton();
     private JButton RowSizeDownJButton =new JButton();
@@ -35,6 +37,10 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
     private JTextField row_sizeJTextField = new JTextField("",3);
     private JTextField column_sizeJTextField = new JTextField("",3);
     private JButton enter_matrix_size_JButton = new JButton("Enter Matrix Size");
+
+    private JButton calculate_rem_Button=new JButton();
+    private JButton calculate_rrem_Button=new JButton();
+
     GridBagConstraints c = new GridBagConstraints();
 
     private int frame_width;
@@ -52,7 +58,8 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
         rrem_Button=new javax.swing.JButton("rrem check");
         reset_Button =new javax.swing.JButton("reset matrix");
         fill_zero_Button =new javax.swing.JButton("fill empty matix with 0");
-
+        calculate_rem_Button=new javax.swing.JButton("calculate rem");
+        calculate_rrem_Button=new javax.swing.JButton("calculate rrem");
         ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
         
         RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("up.png")));
@@ -109,10 +116,16 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
 
         c.gridx=1;c.gridy=1;
         button_panel.add(rem_Button,c);
+        /*
         c.gridx=2;c.gridy=1;
-        button_panel.add(reset_Button,c);
-        c.gridx=3;c.gridy=1;
+        button_panel.add(reset_Button,c);*/
+        c.gridx=2;c.gridy=1;
         button_panel.add(rrem_Button,c);
+
+        c.gridx=1;c.gridy=2;
+        button_panel.add(calculate_rem_Button,c);
+        c.gridx=2;c.gridy=2;
+        button_panel.add(calculate_rrem_Button,c);
 
         /* 
         c.gridx=1;c.gridy=1;
@@ -121,8 +134,11 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
         matrix_panel_center.add(matrix_panel,c);
 
         c.gridx=1;c.gridy=2;
-        main_panel.add(fill_zero_Button,c);
+        main_panel.add(reset_Button,c);
         c.gridx=1;c.gridy=3;
+        main_panel.add(fill_zero_Button,c);
+
+        c.gridx=1;c.gridy=4;
         main_panel.add(button_panel,c);
 
         c.gridx=2;c.gridy=1;
@@ -165,6 +181,10 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
         ColumnSizeDownJButton.addActionListener(this);
 
         enter_matrix_size_JButton.addActionListener(this);
+
+        calculate_rem_Button.addActionListener(this);
+        calculate_rrem_Button.addActionListener(this);
+
         frame.pack();
         //frame.setSize(500,550);
         frame.setVisible(true);
@@ -295,6 +315,25 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
                 }
                 
             }
+            else if(click_event.getSource()==calculate_rem_Button){
+                float[][] matrix=new float[row][column];
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
+                    matrix[i][l]=Float.parseFloat(matrix_textfield[i][l].getText());
+                    }
+                }
+                new calculate_gui(row, column, matrix, "rem");
+            }
+            else if(click_event.getSource()==calculate_rrem_Button){
+                float[][] matrix=new float[row][column];
+                for(int i=0;i<row;i++){
+                    for(int l=0;l<column;l++){
+                    matrix[i][l]=Float.parseFloat(matrix_textfield[i][l].getText());
+                    }
+                }
+                new calculate_gui(row, column, matrix, "rrem");
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Pls Input Only Float In Matrix"/*+e*/);
         }
@@ -302,6 +341,46 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
     }
 }
 
+class calculate_gui extends javax.swing.JFrame{
+    JFrame frame =new JFrame();
+    Container container = frame.getContentPane();
+
+    private JPanel main_panel = new JPanel();
+    private JLabel textLabel = new JLabel();
+    private String text="";
+    calculate_gui(int rows,int columns,float[][] matrix,String choice){
+
+        matrix_operation m_o = new matrix_operation(rows, columns);
+        if(choice.equals("rem")){
+            m_o.rem(matrix);
+        }
+        else if(choice.equals("rrem")){
+            m_o.rrem(matrix);
+        }
+        try {
+            File myObj = new File("tmp.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                text = text+"<br>"+myReader.nextLine();
+            }
+                myReader.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        //System.out.println(text+"a");
+        textLabel.setText("<html>"+text+"</html>");
+        container.setLayout(new BorderLayout());
+
+        container.add(textLabel,BorderLayout.CENTER);
+
+        frame.pack();
+        //frame.setSize(500,550);
+        frame.setVisible(true);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+
+    }
+}
 interface matrix_operation_template{
     boolean row_is_zero(float[][]matrix,int row);
     int leading_coefficient(float[][]matrix,int row);
@@ -391,5 +470,165 @@ class matrix_operation implements matrix_operation_template{
             return true;
         }
         return false;
+    }
+
+    void multiplying_row_by_constant(float[][] matrix,int row,float constant){
+        if(constant==0){
+            return;
+        }
+        else{for(int i=0;i<columns;i++){
+            matrix[row-1][i]=matrix[row-1][i]*constant;
+        }}
+    }
+
+    void adding_row_by_row(float[][] matrix,int row_1,int row_2,float constant){//row_1 คือตัวตั้ง row_2 คือตัวบวก
+        if(constant==0){
+            return;
+        }
+        else{for(int i=0;i<columns;i++){
+            matrix[row_1-1][i]=matrix[row_1-1][i]+(matrix[row_2-1][i]*constant);
+        }}
+    }
+
+    void switching_two_rows(float[][] matrix,int row_1,int row_2){//สลับแถว
+        for(int i=0;i<columns;i++){
+            float tmp=matrix[row_1-1][i];
+            matrix[row_1-1][i]=matrix[row_2-1][i];
+            matrix[row_2-1][i]=tmp;
+        }
+    }
+    
+    String matrix_to_string(float[][] matrix){
+        String matrix_string="";
+        for(int i=0;i<rows;i++){
+            for(int l=0;l<columns;l++){
+                matrix_string=matrix_string+matrix[i][l]+"    ";
+            }
+            matrix_string=matrix_string+"\n";
+        }
+        return matrix_string;
+    }
+
+    void rrem(float[][]matrix){
+        matrix_operation m_o=new matrix_operation(rows,columns);
+        int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        String tmp="";
+        String text="";
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(leading_coefficient_position_in_row!=-1){//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+                    //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
+                    if(matrix[leading_coefficient_position_in_row][i]==1){
+                        if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
+                            tmp="R"+(l+1)+"+("+(-matrix[l][i])+")R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]); 
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";                   
+                        }
+                    }
+                    else if(matrix[l][i]!=0&&leading_coefficient_position_in_row<=l){//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
+                        if(l!=leading_coefficient_position_in_row){//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
+                            tmp="R"+(l+1)+"↔R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
+                        }
+                        if(matrix[leading_coefficient_position_in_row][i]!=1){//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            tmp="R"+(leading_coefficient_position_in_row+1)+"/"+matrix[leading_coefficient_position_in_row][i]+"\n\n";
+                            m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
+                        }
+                        //System.out.println("2 rows = "+l);
+                        l=-1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
+                    }
+                }
+                //m_o.print_matrix(matrix);
+                //System.out.println("__________________________________________________________");
+            }
+            if(leading_coefficient_position_in_row==-1){}//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+            else if(matrix[leading_coefficient_position_in_row][i]==1){
+                leading_coefficient_position_in_row++;
+                if(leading_coefficient_position_in_row==rows){//ถ้า leading_coefficient_position_in_row มีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะ เพื่อจะไม่ต้องทำต่อ
+                    leading_coefficient_position_in_row=-1;
+                }
+            }
+            
+        }
+
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(matrix[l][i]==-0){matrix[l][i]=0;}
+            }
+        }
+
+        try {
+            FileWriter myWriter = new FileWriter("tmp.txt");
+            myWriter.write(text);
+            myWriter.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }      
+    }
+
+    void rem(float[][]matrix){
+        matrix_operation m_o=new matrix_operation(rows,columns);
+        int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        String tmp="";
+        String text="";
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(leading_coefficient_position_in_row!=-1){//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+                    //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
+                    if(matrix[leading_coefficient_position_in_row][i]==1){
+                        if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0&&leading_coefficient_position_in_row<l){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือที่อยู่ข้างล่างหลักนั้นให้เป็น 0     
+                            tmp="R"+(l+1)+"+("+(-matrix[l][i])+")R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]); 
+                            m_o.set_negative_zero_to_zero_matrix(matrix);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";                   
+                        }
+                    }
+                    else if(matrix[l][i]!=0&&leading_coefficient_position_in_row<=l){//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
+                        if(l!=leading_coefficient_position_in_row){//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
+                            tmp="R"+(l+1)+"↔R"+(leading_coefficient_position_in_row+1)+"\n\n";
+                            m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);
+                            m_o.set_negative_zero_to_zero_matrix(matrix);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
+                        }
+                        if(matrix[leading_coefficient_position_in_row][i]!=1){//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            tmp="R"+(leading_coefficient_position_in_row+1)+"/"+matrix[leading_coefficient_position_in_row][i]+"\n\n";
+                            m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
+                            m_o.set_negative_zero_to_zero_matrix(matrix);
+                            text=text+m_o.matrix_to_string(matrix)+tmp+"";
+                        }
+                        //System.out.println("2 rows = "+l);
+                        l=-1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
+                    }
+                }
+                //m_o.print_matrix(matrix);
+                //System.out.println("__________________________________________________________");
+            }
+            if(leading_coefficient_position_in_row==-1){}//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+            else if(matrix[leading_coefficient_position_in_row][i]==1){
+                leading_coefficient_position_in_row++;
+                if(leading_coefficient_position_in_row==rows){//ถ้า leading_coefficient_position_in_row มีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะ เพื่อจะไม่ต้องทำต่อ
+                    leading_coefficient_position_in_row=-1;
+                }
+            }
+            
+        }
+
+        try {
+            FileWriter myWriter = new FileWriter("tmp.txt");
+            myWriter.write(text);
+            myWriter.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }      
+    }
+
+    void set_negative_zero_to_zero_matrix(float[][] matrix){
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(matrix[l][i]==-0){matrix[l][i]=0;}
+            }
+        }
     }
 }
