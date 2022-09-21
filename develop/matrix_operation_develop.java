@@ -142,7 +142,7 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
         int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
         for(int i=0;i<columns;i++){
             for(int l=0;l<rows;l++){
-                if(leading_coefficient_position_in_row!=-1){
+                if(leading_coefficient_position_in_row!=-1){//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
                     //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
                     if(matrix[leading_coefficient_position_in_row][i]==1){
                         if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
@@ -156,16 +156,16 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
                             m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
                         }
                         //System.out.println("2 rows = "+l);
-                        l=-1;
+                        l=-1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
                     }
                 }
                 //m_o.print_matrix(matrix);
                 //System.out.println("__________________________________________________________");
             }
-            if(leading_coefficient_position_in_row==-1){}
+            if(leading_coefficient_position_in_row==-1){}//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
             else if(matrix[leading_coefficient_position_in_row][i]==1){
                 leading_coefficient_position_in_row++;
-                if(leading_coefficient_position_in_row==rows){
+                if(leading_coefficient_position_in_row==rows){//ถ้า leading_coefficient_position_in_row มีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะ เพื่อจะไม่ต้องทำต่อ
                     leading_coefficient_position_in_row=-1;
                 }
             }
@@ -183,7 +183,7 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
         int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
         for(int i=0;i<columns;i++){
             for(int l=0;l<rows;l++){
-                if(leading_coefficient_position_in_row!=-1){
+                if(leading_coefficient_position_in_row!=-1){//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
                     //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
                     if(matrix[leading_coefficient_position_in_row][i]==1){
                         if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0&&leading_coefficient_position_in_row<l){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือที่อยู่ข้างล่างหลักนั้นให้เป็น 0
@@ -197,16 +197,16 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
                             m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
                         }
                         //System.out.println("2 rows = "+l);
-                        l=-1;
+                        l=-1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
                     }
                 }
                 //m_o.print_matrix(matrix);
                 //System.out.println("__________________________________________________________");
             }
-            if(leading_coefficient_position_in_row==-1){}
+            if(leading_coefficient_position_in_row==-1){}//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
             else if(matrix[leading_coefficient_position_in_row][i]==1){
                 leading_coefficient_position_in_row++;
-                if(leading_coefficient_position_in_row==rows){
+                if(leading_coefficient_position_in_row==rows){//ถ้า leading_coefficient_position_in_row มีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะ เพื่อจะไม่ต้องทำต่อ
                     leading_coefficient_position_in_row=-1;
                 }
             }
