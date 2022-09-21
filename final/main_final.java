@@ -477,7 +477,8 @@ class matrix_operation implements matrix_operation_template{
             return;
         }
         else{for(int i=0;i<columns;i++){
-            matrix[row-1][i]=matrix[row-1][i]*constant;
+            if(matrix[row-1][i]==0){}
+            else {matrix[row-1][i]=matrix[row-1][i]*constant;}
         }}
     }
 
@@ -581,7 +582,7 @@ class matrix_operation implements matrix_operation_template{
                         if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0&&leading_coefficient_position_in_row<l){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือที่อยู่ข้างล่างหลักนั้นให้เป็น 0     
                             tmp="R"+(l+1)+"+("+(-matrix[l][i])+")R"+(leading_coefficient_position_in_row+1)+"\n\n";
                             m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]); 
-                            m_o.set_negative_zero_to_zero_matrix(matrix);
+                            /*m_o.set_negative_zero_to_zero_matrix(matrix);*/
                             text=text+m_o.matrix_to_string(matrix)+tmp+"";                   
                         }
                     }
@@ -589,13 +590,13 @@ class matrix_operation implements matrix_operation_template{
                         if(l!=leading_coefficient_position_in_row){//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
                             tmp="R"+(l+1)+"↔R"+(leading_coefficient_position_in_row+1)+"\n\n";
                             m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);
-                            m_o.set_negative_zero_to_zero_matrix(matrix);
+                            /*m_o.set_negative_zero_to_zero_matrix(matrix);*/
                             text=text+m_o.matrix_to_string(matrix)+tmp+"";
                         }
                         if(matrix[leading_coefficient_position_in_row][i]!=1){//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
                             tmp="R"+(leading_coefficient_position_in_row+1)+"/"+matrix[leading_coefficient_position_in_row][i]+"\n\n";
                             m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
-                            m_o.set_negative_zero_to_zero_matrix(matrix);
+                            /*m_o.set_negative_zero_to_zero_matrix(matrix);*/
                             text=text+m_o.matrix_to_string(matrix)+tmp+"";
                         }
                         //System.out.println("2 rows = "+l);
@@ -623,12 +624,12 @@ class matrix_operation implements matrix_operation_template{
             // TODO: handle exception
         }      
     }
-
+    /*
     void set_negative_zero_to_zero_matrix(float[][] matrix){
         for(int i=0;i<columns;i++){
             for(int l=0;l<rows;l++){
                 if(matrix[l][i]==-0){matrix[l][i]=0;}
             }
         }
-    }
+    }*/
 }
