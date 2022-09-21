@@ -120,7 +120,7 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
         }}
     }
 
-    void adding_row_by_row(float[][] matrix,int row_1,int row_2,int constant){//row_1 คือตัวตั้ง row_2 คือตัวบวก
+    void adding_row_by_row(float[][] matrix,int row_1,int row_2,float constant){//row_1 คือตัวตั้ง row_2 คือตัวบวก
         if(constant==0){
             return;
         }
@@ -136,15 +136,88 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
             matrix[row_2-1][i]=tmp;
         }
     }
-    /*
-    void rem(float[][]matrix){//ยังไม่เสร็จ อาจไม่ต้องทำ
-        matrix_operation m_o=new matrix_operation(rows,columns);
-        while(m_o.check_row_echelon_matrix(matrix)!=true){
-            for(int i=2;i<=rows;i++){
-                if(m_o.row_is_zero(matrix, i-1)&&(m_o.row_is_zero(matrix, i)==false)){m_o.switching_two_rows(matrix, i-1, i);i=2;}
-            }            
+    
+    void rrem(float[][]matrix){
+        matrix_operation_develop m_o=new matrix_operation_develop(rows,columns);
+        int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(leading_coefficient_position_in_row!=-1){
+                    //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
+                    if(matrix[leading_coefficient_position_in_row][i]==1){
+                        if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
+                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]);                            
+                        }
+                    }
+                    else if(matrix[l][i]!=0&&leading_coefficient_position_in_row<=l){//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
+                        if(l!=leading_coefficient_position_in_row){//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
+                        m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);}
+                        if(matrix[leading_coefficient_position_in_row][i]!=1){//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
+                        }
+                        //System.out.println("2 rows = "+l);
+                        l=-1;
+                    }
+                }
+                //m_o.print_matrix(matrix);
+                //System.out.println("__________________________________________________________");
+            }
+            if(leading_coefficient_position_in_row==-1){}
+            else if(matrix[leading_coefficient_position_in_row][i]==1){
+                leading_coefficient_position_in_row++;
+                if(leading_coefficient_position_in_row==rows){
+                    leading_coefficient_position_in_row=-1;
+                }
+            }
+        }
+
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(matrix[l][i]==-0){matrix[l][i]=0;}
+            }
         }
     }
-    */
+
+    void rem(float[][]matrix){
+        matrix_operation_develop m_o=new matrix_operation_develop(rows,columns);
+        int leading_coefficient_position_in_row=0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(leading_coefficient_position_in_row!=-1){
+                    //System.out.println("l = "+l+" , i = "+i+", lead ="+leading_coefficient_position_in_row);
+                    if(matrix[leading_coefficient_position_in_row][i]==1){
+                        if(leading_coefficient_position_in_row!=l&&matrix[l][i]!=0&&leading_coefficient_position_in_row<l){//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือที่อยู่ข้างล่างหลักนั้นให้เป็น 0
+                            m_o.adding_row_by_row(matrix, l+1, leading_coefficient_position_in_row+1, -matrix[l][i]);                            
+                        }
+                    }
+                    else if(matrix[l][i]!=0&&leading_coefficient_position_in_row<=l){//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
+                        if(l!=leading_coefficient_position_in_row){//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
+                            m_o.switching_two_rows(matrix,l+1,leading_coefficient_position_in_row+1);}
+                        if(matrix[leading_coefficient_position_in_row][i]!=1){//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            m_o.multiplying_row_by_constant(matrix, leading_coefficient_position_in_row+1, 1/matrix[leading_coefficient_position_in_row][i]);
+                        }
+                        //System.out.println("2 rows = "+l);
+                        l=-1;
+                    }
+                }
+                //m_o.print_matrix(matrix);
+                //System.out.println("__________________________________________________________");
+            }
+            if(leading_coefficient_position_in_row==-1){}
+            else if(matrix[leading_coefficient_position_in_row][i]==1){
+                leading_coefficient_position_in_row++;
+                if(leading_coefficient_position_in_row==rows){
+                    leading_coefficient_position_in_row=-1;
+                }
+            }
+        }
+
+        for(int i=0;i<columns;i++){
+            for(int l=0;l<rows;l++){
+                if(matrix[l][i]==-0){matrix[l][i]=0;}
+            }
+        }
+    }
+    
 
 }

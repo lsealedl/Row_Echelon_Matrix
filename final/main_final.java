@@ -282,17 +282,21 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
                 
             }
             else if(click_event.getSource()==enter_matrix_size_JButton){
-                if(Integer.parseInt(column_sizeJTextField.getText())>=1&&Integer.parseInt(column_sizeJTextField.getText())<=max
-                &&Integer.parseInt(row_sizeJTextField.getText())>=1&&Integer.parseInt(row_sizeJTextField.getText())<=max){
-                    column=Integer.parseInt(column_sizeJTextField.getText());
-                    row=Integer.parseInt(row_sizeJTextField.getText());
-                    reload_matrix();
+                try {
+                    if(Integer.parseInt(column_sizeJTextField.getText())>=1&&Integer.parseInt(column_sizeJTextField.getText())<=max
+                    &&Integer.parseInt(row_sizeJTextField.getText())>=1&&Integer.parseInt(row_sizeJTextField.getText())<=max){
+                        column=Integer.parseInt(column_sizeJTextField.getText());
+                        row=Integer.parseInt(row_sizeJTextField.getText());
+                        reload_matrix();
+                    }
+                    else{JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to "+max);}
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Pls Input Only Integer In Matrix Size"/*+e*/);
                 }
-                else{JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to "+max);}
                 
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Pls Input Only Integer"/*+e*/);
+            JOptionPane.showMessageDialog(null, "Pls Input Only Float In Matrix"/*+e*/);
         }
         
     }
