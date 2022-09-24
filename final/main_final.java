@@ -56,7 +56,7 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
         rrem_Button=new javax.swing.JButton("RREM check");
         reset_Button =new javax.swing.JButton("reset matrix");
         fill_zero_Button =new javax.swing.JButton("fill empty matix with 0");
-        calculate_rem_Button=new javax.swing.JButton("calculate REN");
+        calculate_rem_Button=new javax.swing.JButton("calculate REM");
         calculate_rrem_Button=new javax.swing.JButton("calculate RREM");
         ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
         
@@ -342,8 +342,8 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
 }
 
 class calculate_gui extends javax.swing.JFrame{
-    JFrame frame =new JFrame();
-    Container container = frame.getContentPane();
+    private JFrame frame =new JFrame();
+    private Container container = frame.getContentPane();
 
     calculate_gui(int rows,int columns,float[][] matrix,String choice){ 
         matrix_operation m_o = new matrix_operation(rows, columns);
@@ -388,6 +388,12 @@ interface matrix_operation_template{
     int leading_coefficient(float[][]matrix,int row);
     boolean check_row_echelon_matrix(float[][] matrix);
     boolean check_reduce_row_echelon_matrix(float[][] matrix);
+    void multiplying_row_by_constant(float[][] matrix,int row,float constant);
+    void adding_row_by_row(float[][] matrix,int row_1,int row_2,float constant);
+    void switching_two_rows(float[][] matrix,int row_1,int row_2);
+    JPanel matrix_to_Jpanel(float[][] matrix);
+    JPanel calulate_rrem_to_JPanel(float[][]matrix);
+    JPanel calulate_rem_to_JPanel(float[][]matrix);
 }
 
 class matrix_operation implements matrix_operation_template{
@@ -473,7 +479,7 @@ class matrix_operation implements matrix_operation_template{
         return false;
     }
 
-    void multiplying_row_by_constant(float[][] matrix,int row,float constant){
+    public void multiplying_row_by_constant(float[][] matrix,int row,float constant){
         if(constant==0){
             return;
         }
@@ -483,7 +489,7 @@ class matrix_operation implements matrix_operation_template{
         }}
     }
 
-    void adding_row_by_row(float[][] matrix,int row_1,int row_2,float constant){//row_1 คือตัวตั้ง row_2 คือตัวบวก
+    public void adding_row_by_row(float[][] matrix,int row_1,int row_2,float constant){//row_1 คือตัวตั้ง row_2 คือตัวบวก
         if(constant==0){
             return;
         }
@@ -492,7 +498,7 @@ class matrix_operation implements matrix_operation_template{
         }}
     }
 
-    void switching_two_rows(float[][] matrix,int row_1,int row_2){//สลับแถว
+    public void switching_two_rows(float[][] matrix,int row_1,int row_2){//สลับแถว
         for(int i=0;i<columns;i++){
             float tmp=matrix[row_1-1][i];
             matrix[row_1-1][i]=matrix[row_2-1][i];
@@ -500,7 +506,7 @@ class matrix_operation implements matrix_operation_template{
         }
     }
     
-    JPanel matrix_to_Jpanel(float[][] matrix){
+    public JPanel matrix_to_Jpanel(float[][] matrix){
         JPanel main_panel=new JPanel();
         JPanel matrix_panel=new JPanel();
         JLabel[][] matrix_Jlabel = new JLabel[rows][columns];
@@ -519,7 +525,7 @@ class matrix_operation implements matrix_operation_template{
         return main_panel;
     }
 
-    JPanel calulate_rrem_to_JPanel(float[][]matrix){
+    public JPanel calulate_rrem_to_JPanel(float[][]matrix){
         JPanel panel=new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -622,7 +628,7 @@ class matrix_operation implements matrix_operation_template{
         return panel;      
     }
 
-    JPanel calulate_rem_to_JPanel(float[][]matrix){
+    public JPanel calulate_rem_to_JPanel(float[][]matrix){
         JPanel panel=new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
