@@ -159,7 +159,7 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
         container.add(top_panel,BorderLayout.NORTH);
 
 
-        container.add(matrix_panel_center,BorderLayout.CENTER); //ทำให้สวยขึ้นได้ แต่ยังมีบัค
+        container.add(matrix_panel_center,BorderLayout.CENTER); 
 
         container.add(main_panel,BorderLayout.SOUTH);
 
