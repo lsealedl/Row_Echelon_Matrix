@@ -307,8 +307,8 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
                     matrix[i][l]=Float.parseFloat(matrix_textfield[i][l].getText());
                     }
                 }
-                if(m_o.check_reduce_row_echelon_matrix(matrix)==true){
-                    JOptionPane.showMessageDialog(null, "It Already Is Reduce Row Echelon Matrix");
+                if(m_o.check_row_echelon_matrix(matrix)==true){
+                    JOptionPane.showMessageDialog(null, "It Already Is Row Echelon Matrix");
                 }
                 else{
                     new calculate_gui(row, column, matrix, "rem");
@@ -323,7 +323,7 @@ class gui extends javax.swing.JFrame implements ActionListener{ //เพิ่�
                     }
                 }
                 if(m_o.check_reduce_row_echelon_matrix(matrix)==true){
-                    JOptionPane.showMessageDialog(null, "It Already Is Row Echelon Matrix");
+                    JOptionPane.showMessageDialog(null, "It Already Is Reduce Row Echelon Matrix");
                 }
                 else{
                     new calculate_gui(row, column, matrix, "rrem");
