@@ -357,7 +357,7 @@ class calculate_gui extends javax.swing.JFrame{
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 1, 13));
         if(choice.equals("rem")){
-            titleLabel.setText("Calculate Row Echelon");
+            titleLabel.setText("Calculate Row Echelon Matrix");
             c.gridx=0;c.gridy=0;
             subPanel.add(titleLabel,c);
             c.gridx=0;c.gridy=1;
@@ -365,7 +365,7 @@ class calculate_gui extends javax.swing.JFrame{
             calculate_panel.add(subPanel,BorderLayout.CENTER);
         }
         else if(choice.equals("rrem")){
-            titleLabel.setText("Calculate Reduced Row Echelon");
+            titleLabel.setText("Calculate Reduced Row Echelon Matrix");
             c.gridx=0;c.gridy=0;
             subPanel.add(titleLabel,c);
             c.gridx=0;c.gridy=1;
