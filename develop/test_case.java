@@ -4,7 +4,7 @@ public class test_case {
       
 
         test_case_tool test=new test_case_tool();
-        /*
+        
         System.out.println("ข้อ 1");
         float[] array1={
             1,0,2,1,
@@ -210,8 +210,8 @@ public class test_case {
           0,2,0
         };
         test.use(3, 3, array25, false, false);
-        */
-
+        
+        /*
         System.out.println("ข้อ 1");
         float[] array_rrem_1={
           1,1,2,9,
@@ -219,8 +219,7 @@ public class test_case {
           3,6,-5,0
         };
         test.use_check_rem_rrem(3,4,array_rrem_1);
-        
-       /* 
+
         System.out.println("ข้อ 2");
         float[] array_rrem_2={
           1,
@@ -236,7 +235,7 @@ public class test_case {
           3,6
         };
         test.use_check_rem_rrem(3,2,array_rrem_3);
-        /*
+
         System.out.println("ข้อ 4");
         float[] array_rrem_4={
           1,-3,0,-1,0,-1,
@@ -245,8 +244,7 @@ public class test_case {
           -1,3,2,5,1,6
         };
         test.use_check_rem_rrem(4,6,array_rrem_4);
-        */
-        /* 
+
         System.out.println("ข้อ 5");
         float[] array_rrem_5={
           0,1,

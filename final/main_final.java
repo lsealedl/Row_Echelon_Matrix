@@ -1,10 +1,8 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class main_final {
-
     public static void main(String[] arngs) {
         new gui(1, 1);
     }
@@ -200,7 +198,7 @@ class gui extends javax.swing.JFrame implements ActionListener { //เพิ่�
         frame_width = frame.getWidth();
     }
 
-    public void generate_matrix(int row, int column, JPanel matrix_panel) {//เอาไว้สร้าง matrix
+    private void generate_matrix(int row, int column, JPanel matrix_panel) {//เอาไว้สร้าง matrix
         matrix_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 5, 5);
@@ -223,7 +221,7 @@ class gui extends javax.swing.JFrame implements ActionListener { //เพิ่�
         }
     }
 
-    public void reload_matrix() {//เอาไว้ reload matrix เมื่อเกิดการเพิ่มขนาด matrix
+    private void reload_matrix() {//เอาไว้ reload matrix เมื่อเกิดการเพิ่มขนาด matrix
         matrix_panel.setLayout(new GridBagLayout());
         matrix_panel.removeAll();
         generate_matrix(row, column, matrix_panel);
@@ -406,7 +404,6 @@ interface matrix_operation_template {
 }
 
 class matrix_operation implements matrix_operation_template {
-
     /*
     rows คือ จำนวนแถว
     columns คือ จำนวนหลัก
@@ -453,7 +450,6 @@ class matrix_operation implements matrix_operation_template {
             }//ถ้า matrix มี 1 แถวแล้วแถว 1 เป็น 0 ทั้งแถวหรือมีตัวนำ 1
             else {
                 return false;
-
             }
         }
         for (int i = 2; i <= rows; i++) {
@@ -472,19 +468,6 @@ class matrix_operation implements matrix_operation_template {
                 }
             } else {
                 return false;
-            }
-        }
-        for (int i = 1; i <= rows; i++) {
-            if (leading_coefficient(matrix, i) != -1) {//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
-                for (int l = i; l <= rows; l++) {
-                    if (matrix[l - 1][leading_coefficient(matrix, i) - 1] == 0) {
-                    }//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น เฉพาะข้างล่าง
-                    else if (l == i) {
-                    }//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
-                    else {
-                        return false;
-                    }
-                }
             }
         }
         return true;

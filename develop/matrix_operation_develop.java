@@ -1,5 +1,5 @@
-import java.util.*;
-import java.io.FileWriter; 
+import java.io.FileWriter;
+import java.util.*; 
 interface matrix_operation_develop_template{
     boolean row_is_zero(float[][]matrix,int row);
     int leading_coefficient(float[][]matrix,int row);
@@ -91,15 +91,6 @@ public class matrix_operation_develop implements matrix_operation_develop_templa
                 else {return false;}
             }
             else {return false;}                        
-        }
-        for(int i=1;i<=rows;i++){
-            if(m_o.leading_coefficient(matrix,i)!=-1){//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
-                for(int l=i;l<=rows;l++){
-                    if(matrix[l-1][m_o.leading_coefficient(matrix,i)-1]==0){}//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น เฉพาะข้างล่าง
-                    else if(l==i){}//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
-                    else {return false;}
-                }
-            }
         }
         return true;
     }
