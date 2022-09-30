@@ -2,13 +2,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 public class main_final {
     public static void main(String[] arngs) {
         new gui(1, 1);
     }
 }
 
-class gui extends javax.swing.JFrame implements ActionListener { //เพิ่มให้ class extends javax.swing.JFrame 
+
+class gui extends javax.swing.JFrame  implements ActionListener{ //เพิ่มให้ class extends javax.swing.JFrame 
 
     private int max = 10;
 
@@ -39,14 +41,15 @@ class gui extends javax.swing.JFrame implements ActionListener { //เพิ่�
     private JButton calculate_rem_Button = new JButton();
     private JButton calculate_rrem_Button = new JButton();
 
+    private JLabel background;
     GridBagConstraints c = new GridBagConstraints();
 
     private int frame_width;
+    
 
     gui(int row, int column) {
         this.row = row;
-        this.column = column;
-
+        this.column = column; 
         ///////////////////////////////////////////////////////////////////////////////////////////////////// ทำให้ปุ่มใช้ feature ที่มีใน  javax.swing มาใช้
         RowSizeUpJButton = new javax.swing.JButton();
         RowSizeDownJButton = new javax.swing.JButton();
@@ -174,6 +177,7 @@ class gui extends javax.swing.JFrame implements ActionListener { //เพิ่�
         container.add(top_panel, BorderLayout.NORTH);
         container.add(matrix_panel_center, BorderLayout.CENTER);
         container.add(main_panel, BorderLayout.SOUTH);
+        
 
         fill_zero_Button.addActionListener(this);
         reset_Button.addActionListener(this);
@@ -189,13 +193,16 @@ class gui extends javax.swing.JFrame implements ActionListener { //เพิ่�
 
         calculate_rem_Button.addActionListener(this);
         calculate_rrem_Button.addActionListener(this);
-
+ 
+        
         frame.pack();
         //frame.setSize(500,550);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame_width = frame.getWidth();
+        
+
     }
 
     private void generate_matrix(int row, int column, JPanel matrix_panel) {//เอาไว้สร้าง matrix
@@ -347,6 +354,7 @@ class calculate_gui extends javax.swing.JFrame {
 
     private JFrame frame = new JFrame();
     private Container container = frame.getContentPane();
+    
 
     calculate_gui(int rows, int columns, float[][] matrix, String choice) {
         matrix_operation m_o = new matrix_operation(rows, columns);
@@ -533,7 +541,11 @@ class matrix_operation implements matrix_operation_template {
         for (int i = 0; i < rows; i++) {
             for (int l = 0; l < columns; l++) {
                 matrix_Jlabel[i][l] = new JLabel();
-                matrix_Jlabel[i][l].setText(matrix[i][l] + "   ");
+                if(Math.round(matrix[i][l])==matrix[i][l])
+                //if(matrix[i][l]-(int)matrix[i][l] == 0 )
+                matrix_Jlabel[i][l].setText(String.format("%.0f",(matrix[i][l]))+"   ");
+                else
+                matrix_Jlabel[i][l].setText(String.format("%.2f",(matrix[i][l]))+"   ");
                 matrix_Jlabel[i][l].setFont(new java.awt.Font("Tahoma", 1, 13));
                 c.gridx = l;
                 c.gridy = i;
