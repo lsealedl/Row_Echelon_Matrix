@@ -46,6 +46,9 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
 
     GridBagConstraints c = new GridBagConstraints();
 
+    private Color JlabelColor = new Color(179, 188, 24);
+    private Color JlabelColor2 = new Color(0, 102, 100);
+
     private int frame_width;
 
     gui(int row, int column) {
@@ -198,6 +201,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         calculate_rem_Button.addActionListener(this);
         calculate_rrem_Button.addActionListener(this);
 
+        fill_zero_Button.addMouseListener(this);
         reset_Button.addMouseListener(this);
         rem_Button.addMouseListener(this);
         rrem_Button.addMouseListener(this);
@@ -232,18 +236,9 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         calculate_rem_Button.setBackground(JlabelColor);
         calculate_rrem_Button.setBackground(JlabelColor);
 
-        Color c1 = new Color(0, 102, 204);  
+        Color c1 = new Color(66, 66, 66);  
         container.setBackground(c1);//เปลี่ยนพื้นหลัง
 
-        Color JlabelColor2 = new Color(0, 102, 100);  
-        fill_zero_Button.addMouseListener((new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent e) {
-                fill_zero_Button.setBackground(JlabelColor2);
-            }
-            public void mouseExited(java.awt.event.MouseEvent e) {
-                fill_zero_Button.setBackground(JlabelColor);
-            }
-        }));
 
         frame.pack();
         //frame.setSize(500,550);
@@ -252,6 +247,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         frame.setLocationRelativeTo(null);
         frame_width = frame.getWidth();
     }
+
     @Override
     public void mouseReleased(MouseEvent e) {
         
@@ -264,12 +260,12 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
+        e.getComponent().setBackground(JlabelColor);
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-       
+        e.getComponent().setBackground(JlabelColor2);
     }
 
     @Override
