@@ -1,6 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+
+
+
 public class main_final {
     public static void main(String[] arngs) {
         new gui(1, 1);
@@ -8,7 +13,7 @@ public class main_final {
 }
 
 
-class gui extends javax.swing.JFrame  implements ActionListener{ //เพิ่มให้ class extends javax.swing.JFrame 
+class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ //เพิ่มให้ class extends javax.swing.JFrame 
 
     private int max = 10;
 
@@ -186,18 +191,31 @@ class gui extends javax.swing.JFrame  implements ActionListener{ //เพิ่�
         reset_Button.addActionListener(this);
         rem_Button.addActionListener(this);
         rrem_Button.addActionListener(this);
-
         RowSizeUpJButton.addActionListener(this);
         RowSizeDownJButton.addActionListener(this);
         ColumnSizeUpJButton.addActionListener(this);
         ColumnSizeDownJButton.addActionListener(this);
-
-        enter_matrix_size_JButton.addActionListener(this);
-
         calculate_rem_Button.addActionListener(this);
         calculate_rrem_Button.addActionListener(this);
- 
-        container.setBackground(Color.BLACK);//เปลี่ยนพื้นหลัง
+        
+        fill_zero_Button.addMouseListener((new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                fill_zero_Button.setBackground(Color.GREEN);
+            }
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                fill_zero_Button.setBackground(Color.white);
+            }
+        }));
+        reset_Button.addMouseListener(this);
+        rem_Button.addMouseListener(this);
+        rrem_Button.addMouseListener(this);
+        enter_matrix_size_JButton.addMouseListener(this);
+        calculate_rem_Button.addMouseListener(this);
+        calculate_rrem_Button.addMouseListener(this);
+        
+    
+        Color c1 = new Color(0, 102, 204);  
+        container.setBackground(c1);//เปลี่ยนพื้นหลัง
 
         frame.pack();
         //frame.setSize(500,550);
@@ -205,8 +223,30 @@ class gui extends javax.swing.JFrame  implements ActionListener{ //เพิ่�
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame_width = frame.getWidth();
+    }
+    @Override
+    public void mouseReleased(MouseEvent e) {
         
+    }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+       
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
     }
 
     private void generate_matrix(int row, int column, JPanel matrix_panel) {//เอาไว้สร้าง matrix
