@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-
 public class main_final {
     public static void main(String[] arngs) {
         new gui(1, 1);
@@ -41,11 +39,9 @@ class gui extends javax.swing.JFrame  implements ActionListener{ //เพิ่�
     private JButton calculate_rem_Button = new JButton();
     private JButton calculate_rrem_Button = new JButton();
 
-    private JLabel background;
     GridBagConstraints c = new GridBagConstraints();
 
     private int frame_width;
-    
 
     gui(int row, int column) {
         this.row = row;
@@ -173,7 +169,14 @@ class gui extends javax.swing.JFrame  implements ActionListener{ //เพิ่�
         c.gridy = 1;
         top_panel.add(enter_matrix_size_JButton, c);
 
-        //////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////ทำให้ jpanel ใส
+        button_panel.setOpaque(false);
+        matrix_panel.setOpaque(false);
+        top_panel.setOpaque(false);
+        matrix_panel_center.setOpaque(false);
+        main_panel.setOpaque(false);
+        ///////////////////////////////////////////////////////
+
         container.add(top_panel, BorderLayout.NORTH);
         container.add(matrix_panel_center, BorderLayout.CENTER);
         container.add(main_panel, BorderLayout.SOUTH);
@@ -194,7 +197,8 @@ class gui extends javax.swing.JFrame  implements ActionListener{ //เพิ่�
         calculate_rem_Button.addActionListener(this);
         calculate_rrem_Button.addActionListener(this);
  
-        
+        container.setBackground(Color.BLACK);//เปลี่ยนพื้นหลัง
+
         frame.pack();
         //frame.setSize(500,550);
         frame.setVisible(true);
@@ -358,7 +362,6 @@ class calculate_gui extends javax.swing.JFrame {
 
     calculate_gui(int rows, int columns, float[][] matrix, String choice) {
         matrix_operation m_o = new matrix_operation(rows, columns);
-
         container.setLayout(new BorderLayout());
         JPanel calculate_panel = new JPanel();
         JPanel subPanel = new JPanel();
@@ -392,6 +395,14 @@ class calculate_gui extends javax.swing.JFrame {
         JScrollPane ScrollPane = new JScrollPane(calculate_panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         container.add(ScrollPane, BorderLayout.CENTER);
 
+        titleLabel.setOpaque(false);
+        subPanel.setOpaque(false);
+        calculate_panel.setOpaque(false);
+        ScrollPane.setOpaque(false);
+        ScrollPane.getViewport().setOpaque(false);
+
+        container.setBackground(Color.YELLOW);//เปลี่ยนพื้นหลัง
+        
         //frame.pack();
         frame.setSize(500, 550);
         frame.setVisible(true);
@@ -535,6 +546,10 @@ class matrix_operation implements matrix_operation_template {
     private JPanel matrix_to_Jpanel(float[][] matrix) {//เปลี่ยน matrix เป็น JPanel
         JPanel main_panel = new JPanel();
         JPanel matrix_panel = new JPanel();
+
+        main_panel.setOpaque(false);
+        matrix_panel.setOpaque(false);
+
         JLabel[][] matrix_Jlabel = new JLabel[rows][columns];
         matrix_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -543,9 +558,11 @@ class matrix_operation implements matrix_operation_template {
                 matrix_Jlabel[i][l] = new JLabel();
                 if(Math.round(matrix[i][l])==matrix[i][l])
                 //if(matrix[i][l]-(int)matrix[i][l] == 0 )
-                matrix_Jlabel[i][l].setText(String.format("%.0f",(matrix[i][l]))+"   ");
+                    {matrix_Jlabel[i][l].setText(String.format("%.0f",(matrix[i][l]))+"   ");}
                 else
-                matrix_Jlabel[i][l].setText(String.format("%.2f",(matrix[i][l]))+"   ");
+                    {//matrix_Jlabel[i][l].setText(String.format("%f",(matrix[i][l]))+"   ");
+                    matrix_Jlabel[i][l].setText(matrix[i][l]+"   ");
+                    }
                 matrix_Jlabel[i][l].setFont(new java.awt.Font("Tahoma", 1, 13));
                 c.gridx = l;
                 c.gridy = i;
@@ -558,6 +575,7 @@ class matrix_operation implements matrix_operation_template {
 
     private JLabel set_text_to_JLabel(String tmp) {
         JLabel text_Label = new JLabel();
+        text_Label.setOpaque(false);
         text_Label.setText(tmp);
         text_Label.setFont(new java.awt.Font("Tahoma", 1, 13));
         return text_Label;
@@ -566,6 +584,9 @@ class matrix_operation implements matrix_operation_template {
     public JPanel calulate_rrem_to_JPanel(float[][] matrix) {//คำนวณ rrem และแปลงเป็น JPanel
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
+
+        panel.setOpaque(false);
+
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         int leading_coefficient_position_in_row = 0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
@@ -651,6 +672,9 @@ class matrix_operation implements matrix_operation_template {
     public JPanel calulate_rem_to_JPanel(float[][] matrix) {//คำนวณ rem และแปลงเป็น JPanel
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
+
+        panel.setOpaque(false);
+
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         int leading_coefficient_position_in_row = 0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
