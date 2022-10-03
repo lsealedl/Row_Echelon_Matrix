@@ -66,7 +66,8 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         calculate_rem_Button = new javax.swing.JButton("calculate REM");
         calculate_rrem_Button = new javax.swing.JButton("calculate RREM");
         ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
-        ImageIcon img = new ImageIcon (getClass().getResource("logo.png")); frame.setIconImage (img.getImage ());
+        ImageIcon img = new ImageIcon (getClass().getResource("KU_Logo_PNG.png"));frame.setIconImage (img.getImage());
+
         RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("u.png")));
         RowSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("d.png")));
