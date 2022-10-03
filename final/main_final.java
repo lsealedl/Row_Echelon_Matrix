@@ -66,14 +66,14 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         calculate_rem_Button = new javax.swing.JButton("calculate REM");
         calculate_rrem_Button = new javax.swing.JButton("calculate RREM");
         ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
-        ImageIcon img = new ImageIcon (getClass().getResource("logo1.jpg")); frame.setIconImage (img.getImage ());
-        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("up.png")));
+        ImageIcon img = new ImageIcon (getClass().getResource("logo.png")); frame.setIconImage (img.getImage ());
+        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("u.png")));
         RowSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("down.png")));
+        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("d.png")));
         RowSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("right.png")));
+        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("r.png")));
         ColumnSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("left.png")));
+        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("l.png")));
         ColumnSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         rem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
