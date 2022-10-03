@@ -197,15 +197,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         ColumnSizeDownJButton.addActionListener(this);
         calculate_rem_Button.addActionListener(this);
         calculate_rrem_Button.addActionListener(this);
-        
-        fill_zero_Button.addMouseListener((new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent e) {
-                fill_zero_Button.setBackground(Color.GREEN);
-            }
-            public void mouseExited(java.awt.event.MouseEvent e) {
-                fill_zero_Button.setBackground(Color.white);
-            }
-        }));
+
         reset_Button.addMouseListener(this);
         rem_Button.addMouseListener(this);
         rrem_Button.addMouseListener(this);
@@ -214,8 +206,44 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         calculate_rrem_Button.addMouseListener(this);
         
     
+        Color FontColor = new Color(255, 255, 255);
+        enter_matrix_size_JButton.setForeground(FontColor);
+        fill_zero_Button.setForeground(FontColor);
+        reset_Button.setForeground(FontColor);
+        rem_Button.setForeground(FontColor);
+        rrem_Button.setForeground(FontColor);
+        //RowSizeUpJButton.setForeground(FontColor);
+        //RowSizeDownJButton.setForeground(FontColor);
+        //ColumnSizeUpJButton.setForeground(FontColor);
+        //ColumnSizeDownJButton.setForeground(FontColor);
+        calculate_rem_Button.setForeground(FontColor);
+        calculate_rrem_Button.setForeground(FontColor);
+
+        Color JlabelColor = new Color(179, 188, 24);
+        enter_matrix_size_JButton.setBackground(JlabelColor);
+        fill_zero_Button.setBackground(JlabelColor);
+        reset_Button.setBackground(JlabelColor);
+        rem_Button.setBackground(JlabelColor);
+        rrem_Button.setBackground(JlabelColor);
+        //RowSizeUpJButton.setBackground(JlabelColor);
+        //RowSizeDownJButton.setBackground(JlabelColor);
+        //ColumnSizeUpJButton.setBackground(JlabelColor);
+        //ColumnSizeDownJButton.setBackground(JlabelColor);
+        calculate_rem_Button.setBackground(JlabelColor);
+        calculate_rrem_Button.setBackground(JlabelColor);
+
         Color c1 = new Color(0, 102, 204);  
         container.setBackground(c1);//เปลี่ยนพื้นหลัง
+
+        Color JlabelColor2 = new Color(0, 102, 100);  
+        fill_zero_Button.addMouseListener((new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                fill_zero_Button.setBackground(JlabelColor2);
+            }
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                fill_zero_Button.setBackground(JlabelColor);
+            }
+        }));
 
         frame.pack();
         //frame.setSize(500,550);
