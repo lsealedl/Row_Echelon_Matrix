@@ -430,6 +430,7 @@ class calculate_gui extends javax.swing.JFrame {
     
 
     calculate_gui(int rows, int columns, float[][] matrix, String choice) {
+        ImageIcon img = new ImageIcon (getClass().getResource("KU_Logo_PNG.png"));frame.setIconImage (img.getImage());
         matrix_operation m_o = new matrix_operation(rows, columns);
         container.setLayout(new BorderLayout());
         JPanel calculate_panel = new JPanel();
