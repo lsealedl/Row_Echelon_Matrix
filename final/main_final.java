@@ -4,17 +4,13 @@ import javax.swing.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
-
-
 public class main_final {
     public static void main(String[] arngs) {
         new gui(1, 1);
     }
 }
 
-
-class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ //เพิ่มให้ class extends javax.swing.JFrame 
-
+class gui extends javax.swing.JFrame implements ActionListener, MouseListener { // เพิ่มให้ class extends javax.swing.JFrame
     private int max = 10;
 
     private JButton RowSizeUpJButton = new JButton();
@@ -46,20 +42,18 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
 
     GridBagConstraints c = new GridBagConstraints();
 
-    //private Color JlabelColor = new Color(179, 188, 24);
-    //private Color JlabelColor2 = new Color(0, 102, 100);
-
     private Color JlabelColor = new Color(0, 102, 100);
     private Color JlabelColor2 = new Color(179, 188, 24);
 
-    private Color backgrondColor = new Color(255, 255, 255);  
+    private Color backgrondColor = new Color(255, 255, 255);
 
     private int frame_width;
 
     gui(int row, int column) {
         this.row = row;
-        this.column = column; 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////// ทำให้ปุ่มใช้ feature ที่มีใน  javax.swing มาใช้
+        this.column = column;
+        //////////////////////////////////////////// ทำให้ปุ่มใช้ feature ที่มีใน
+        //////////////////////////////////////////// javax.swing มาใช้
         RowSizeUpJButton = new javax.swing.JButton();
         RowSizeDownJButton = new javax.swing.JButton();
         ColumnSizeUpJButton = new javax.swing.JButton();
@@ -70,8 +64,10 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         fill_zero_Button = new javax.swing.JButton("fill empty matix with 0");
         calculate_rem_Button = new javax.swing.JButton("calculate REM");
         calculate_rrem_Button = new javax.swing.JButton("calculate RREM");
-        ///////////////////////////////////////////////////////////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม , กำหนดตัวอักษร
-        ImageIcon img = new ImageIcon (getClass().getResource("KU_Logo_PNG.png"));frame.setIconImage (img.getImage());
+        /////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม ,
+        /////////////////////////////////////////////// กำหนดตัวอักษร
+        ImageIcon img = new ImageIcon(getClass().getResource("KU_Logo_PNG.png"));
+        frame.setIconImage(img.getImage());
 
         RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("u.png")));
         RowSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -92,10 +88,10 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         row_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
         column_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////
         container.setLayout(new BorderLayout());
 
-        //////////////////////////////////////////////////////ทำ panel ย่อย
+        ////////////////////////////////////////////////////// ทำ panel ย่อย
         main_panel.setLayout(new GridBagLayout());
 
         matrix_panel.setLayout(new GridBagLayout());
@@ -107,7 +103,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         matrix_panel_center.setLayout(new GridBagLayout());
         //////////////////////////////////////////////////////
 
-        //////////////////////////////////////////////////////สร้างช่อง matrix
+        ////////////////////////////////////////////////////// สร้างช่อง matrix
         for (int i = 0; i < max; i++) {
             for (int l = 0; l < max; l++) {
                 matrix_textfield[i][l] = new JTextField("", 3);
@@ -116,7 +112,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         }
         //////////////////////////////////////////////////////
 
-        //////////////////////////////////////////////////////จัดองค์ประกอบต่างๆ
+        ////////////////////////////////////////////////////// จัดองค์ประกอบต่างๆ
         c.insets = new Insets(5, 5, 5, 5);
 
         for (int i = 0; i < row; i++) {
@@ -183,7 +179,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         c.gridy = 1;
         top_panel.add(enter_matrix_size_JButton, c);
 
-        //////////////////////////////////////////////////////ทำให้ jpanel ใส
+        ////////////////////////////////////////////////////// ทำให้ jpanel ใส
         button_panel.setOpaque(false);
         matrix_panel.setOpaque(false);
         top_panel.setOpaque(false);
@@ -194,7 +190,6 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         container.add(top_panel, BorderLayout.NORTH);
         container.add(matrix_panel_center, BorderLayout.CENTER);
         container.add(main_panel, BorderLayout.SOUTH);
-        
 
         fill_zero_Button.addActionListener(this);
         reset_Button.addActionListener(this);
@@ -214,18 +209,17 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         enter_matrix_size_JButton.addMouseListener(this);
         calculate_rem_Button.addMouseListener(this);
         calculate_rrem_Button.addMouseListener(this);
-        
-    
+
         Color FontColor = new Color(255, 255, 255);
         enter_matrix_size_JButton.setForeground(FontColor);
         fill_zero_Button.setForeground(FontColor);
         reset_Button.setForeground(FontColor);
         rem_Button.setForeground(FontColor);
         rrem_Button.setForeground(FontColor);
-        //RowSizeUpJButton.setForeground(FontColor);
-        //RowSizeDownJButton.setForeground(FontColor);
-        //ColumnSizeUpJButton.setForeground(FontColor);
-        //ColumnSizeDownJButton.setForeground(FontColor);
+        // RowSizeUpJButton.setForeground(FontColor);
+        // RowSizeDownJButton.setForeground(FontColor);
+        // ColumnSizeUpJButton.setForeground(FontColor);
+        // ColumnSizeDownJButton.setForeground(FontColor);
         calculate_rem_Button.setForeground(FontColor);
         calculate_rrem_Button.setForeground(FontColor);
 
@@ -234,33 +228,32 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         reset_Button.setBackground(JlabelColor);
         rem_Button.setBackground(JlabelColor);
         rrem_Button.setBackground(JlabelColor);
-        //RowSizeUpJButton.setBackground(JlabelColor);
-        //RowSizeDownJButton.setBackground(JlabelColor);
-        //ColumnSizeUpJButton.setBackground(JlabelColor);
-        //ColumnSizeDownJButton.setBackground(JlabelColor);
+        // RowSizeUpJButton.setBackground(JlabelColor);
+        // RowSizeDownJButton.setBackground(JlabelColor);
+        // ColumnSizeUpJButton.setBackground(JlabelColor);
+        // ColumnSizeDownJButton.setBackground(JlabelColor);
         calculate_rem_Button.setBackground(JlabelColor);
         calculate_rrem_Button.setBackground(JlabelColor);
 
-        container.setBackground(backgrondColor);//เปลี่ยนพื้นหลัง
-
+        container.setBackground(backgrondColor);// เปลี่ยนพื้นหลัง
 
         frame.pack();
         frame.setResizable(false);
-        //frame.setSize(500,550);
+        // frame.setSize(500,550);
         frame.setVisible(true);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame_width = frame.getWidth();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+
     }
 
     @Override
@@ -275,10 +268,10 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+
     }
 
-    private void generate_matrix(int row, int column, JPanel matrix_panel) {//เอาไว้สร้าง matrix
+    private void generate_matrix(int row, int column, JPanel matrix_panel) {// เอาไว้สร้าง matrix
         matrix_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 5, 5);
@@ -301,7 +294,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         }
     }
 
-    private void reload_matrix() {//เอาไว้ reload matrix เมื่อเกิดการเพิ่มขนาด matrix
+    private void reload_matrix() {// เอาไว้ reload matrix เมื่อเกิดการเพิ่มขนาด matrix
         matrix_panel.setLayout(new GridBagLayout());
         matrix_panel.removeAll();
         generate_matrix(row, column, matrix_panel);
@@ -311,7 +304,8 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         frame.pack();
 
         Point frame_location = frame.getLocation();
-        frame.setLocation((int) frame_location.getX() - (frame.getWidth() - frame_width) / 2, (int) frame_location.getY());
+        frame.setLocation((int) frame_location.getX() - (frame.getWidth() - frame_width) / 2,
+                (int) frame_location.getY());
 
         frame_width = frame.getWidth();
     }
@@ -341,7 +335,8 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
                         matrix[i][l] = Float.parseFloat(matrix_textfield[i][l].getText());
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Reduce Row Echelon Matrix : " + m_o.check_reduce_row_echelon_matrix(matrix));
+                JOptionPane.showMessageDialog(null,
+                        "Reduce Row Echelon Matrix : " + m_o.check_reduce_row_echelon_matrix(matrix));
             } else if (click_event.getSource() == fill_zero_Button) {
                 for (int i = 0; i < row; i++) {
                     for (int l = 0; l < column; l++) {
@@ -376,8 +371,10 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
 
             } else if (click_event.getSource() == enter_matrix_size_JButton) {
                 try {
-                    if (Integer.parseInt(column_sizeJTextField.getText()) >= 1 && Integer.parseInt(column_sizeJTextField.getText()) <= max
-                            && Integer.parseInt(row_sizeJTextField.getText()) >= 1 && Integer.parseInt(row_sizeJTextField.getText()) <= max) {
+                    if (Integer.parseInt(column_sizeJTextField.getText()) >= 1
+                            && Integer.parseInt(column_sizeJTextField.getText()) <= max
+                            && Integer.parseInt(row_sizeJTextField.getText()) >= 1
+                            && Integer.parseInt(row_sizeJTextField.getText()) <= max) {
                         column = Integer.parseInt(column_sizeJTextField.getText());
                         row = Integer.parseInt(row_sizeJTextField.getText());
                         reload_matrix();
@@ -385,7 +382,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
                         JOptionPane.showMessageDialog(null, "Pls Matrix Size in 1 to " + max);
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Pls Input Only Integer In Matrix Size"/*+e*/);
+                    JOptionPane.showMessageDialog(null, "Pls Input Only Integer In Matrix Size"/* +e */);
                 }
 
             } else if (click_event.getSource() == calculate_rem_Button) {
@@ -417,7 +414,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Pls Input Only Float In Matrix"/*+e*/);
+            JOptionPane.showMessageDialog(null, "Pls Input Only Float In Matrix");
         }
 
     }
@@ -427,10 +424,10 @@ class calculate_gui extends javax.swing.JFrame {
 
     private JFrame frame = new JFrame();
     private Container container = frame.getContentPane();
-    
 
     calculate_gui(int rows, int columns, float[][] matrix, String choice) {
-        ImageIcon img = new ImageIcon (getClass().getResource("KU_Logo_PNG.png"));frame.setIconImage (img.getImage());
+        ImageIcon img = new ImageIcon(getClass().getResource("KU_Logo_PNG.png"));
+        frame.setIconImage(img.getImage());
         matrix_operation m_o = new matrix_operation(rows, columns);
         container.setLayout(new BorderLayout());
         JPanel calculate_panel = new JPanel();
@@ -441,7 +438,7 @@ class calculate_gui extends javax.swing.JFrame {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        JLabel titleLabel = new JLabel("",SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("", SwingConstants.CENTER);
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 1, 13));
         titleLabel.setForeground(new Color(255, 255, 255));
@@ -449,7 +446,7 @@ class calculate_gui extends javax.swing.JFrame {
         if (choice.equals("rem")) {
             titleLabel.setText("Calculate Row Echelon Matrix");
             c.gridx = 0;
-            c.gridy = 0;          
+            c.gridy = 0;
             subPanel.add(titleLabel, c);
             c.gridx = 0;
             c.gridy = 1;
@@ -465,7 +462,8 @@ class calculate_gui extends javax.swing.JFrame {
             subPanel.add(m_o.calulate_rrem_to_JPanel(matrix), c);
             calculate_panel.add(subPanel, BorderLayout.NORTH);
         }
-        JScrollPane ScrollPane = new JScrollPane(calculate_panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane ScrollPane = new JScrollPane(calculate_panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         ScrollPane.setBorder(BorderFactory.createEmptyBorder());
         container.add(ScrollPane, BorderLayout.CENTER);
 
@@ -476,19 +474,15 @@ class calculate_gui extends javax.swing.JFrame {
         titleLabel.setOpaque(true);
 
         titleLabel.setBackground(new Color(0, 0, 0));
-        container.setBackground(new Color(179, 188, 24));//เปลี่ยนพื้นหลัง
-        titleLabel.setPreferredSize(new Dimension(500, 20));
+        container.setBackground(new Color(179, 188, 24));
+        titleLabel.setPreferredSize(new Dimension(500, 30));
 
-        //frame.pack();
+        // frame.pack();
         frame.setSize(500, 550);
         frame.setResizable(false);
         frame.setVisible(true);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-
-
-        //titleLabel.setPreferredSize(new Dimension(10000, titleLabel.getHeight()));
-        //titleLabel.setPreferredSize(frame.getSize());
     }
 }
 
@@ -504,18 +498,19 @@ interface matrix_operation_template {
 
 class matrix_operation implements matrix_operation_template {
     /*
-    rows คือ จำนวนแถว
-    columns คือ จำนวนหลัก
-    ปัญหาคือ เวลาเก็บใน array มันเริ่มที่ 0 แต่ใน matrix มันเริ่มที่ 1 เวลาใช้ method เลยนับว่าให้เริ่มที่ 1 ตาม matrix
+     * rows คือ จำนวนแถว
+     * columns คือ จำนวนหลัก
+     * ปัญหาคือ เวลาเก็บใน array มันเริ่มที่ 0 แต่ใน matrix มันเริ่มที่ 1 เวลาใช้
+     * method เลยนับว่าให้เริ่มที่ 1 ตาม matrix
      */
     private int rows, columns;
 
-    matrix_operation(int rows, int columns) {//กำหนดจำนวนแถวและหลัก
+    matrix_operation(int rows, int columns) {// กำหนดจำนวนแถวและหลัก
         this.rows = rows;
         this.columns = columns;
     }
 
-    private boolean row_is_zero(float[][] matrix, int row) {//return ว่าแถวเป็น 0 ทั้งแถวหรือเปล่า
+    private boolean row_is_zero(float[][] matrix, int row) {// return ว่าแถวเป็น 0 ทั้งแถวหรือเปล่า
         boolean row_is_zero = true;
         for (int i = 0; i < columns; i++) {
             if (matrix[row - 1][i] == 0) {
@@ -530,7 +525,7 @@ class matrix_operation implements matrix_operation_template {
         }
     }
 
-    private int leading_coefficient(float[][] matrix, int row) {//return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
+    private int leading_coefficient(float[][] matrix, int row) {// return ตำแหน่งของตัวนำ 1 ในแถว ถ้าไม่มีจะ return -1
         for (int i = 0; i < columns; i++) {
             if (matrix[row - 1][i] == 1) {
                 return i + 1;
@@ -542,26 +537,27 @@ class matrix_operation implements matrix_operation_template {
         return -1;
     }
 
-    public boolean check_row_echelon_matrix(float[][] matrix) {//เช็คว่าเป็น row echelon matrix เปล่า
+    public boolean check_row_echelon_matrix(float[][] matrix) {// เช็คว่าเป็น row echelon matrix เปล่า
         if (rows == 1) {
             if ((row_is_zero(matrix, 1)) || leading_coefficient(matrix, 1) != -1) {
                 return true;
-            }//ถ้า matrix มี 1 แถวแล้วแถว 1 เป็น 0 ทั้งแถวหรือมีตัวนำ 1
+            } // ถ้า matrix มี 1 แถวแล้วแถว 1 เป็น 0 ทั้งแถวหรือมีตัวนำ 1
             else {
                 return false;
             }
         }
         for (int i = 2; i <= rows; i++) {
-            if ((leading_coefficient(matrix, i - 1) != -1 || row_is_zero(matrix, i - 1)) && (leading_coefficient(matrix, i) != -1 || row_is_zero(matrix, i))) {//ถ้า (matrix ตัวก่อนหน้ามีตัวนำ 1 หรือเป็น 0 ทั้งแถว) และ (matrix ตัวปัจจุบันมีตัวนำ 1 หรือเป็น 0 ทั้งแถว)
-                if (leading_coefficient(matrix, i - 1) != -1 && leading_coefficient(matrix, i) != -1) {
-                    if (leading_coefficient(matrix, i - 1) < leading_coefficient(matrix, i)) {
+            if ((leading_coefficient(matrix, i - 1) != -1 || row_is_zero(matrix, i - 1))// ถ้า (matrixตัวก่อนหน้ามีตัวนำ 1หรือเป็น 0 ทั้งแถว)
+                    && (leading_coefficient(matrix, i) != -1 || row_is_zero(matrix, i))) {//และ (matrix ตัวปัจจุบันมีตัวนำ1 หรือเป็น 0 ทั้งแถว)
+                if (leading_coefficient(matrix, i - 1) != -1 && leading_coefficient(matrix, i) != -1) {//มีตัวนำ 1 ทั้ง 2 แถว
+                    if (leading_coefficient(matrix, i - 1) < leading_coefficient(matrix, i)) {//ตัวนำ 1 แถวก่อนต้องอยู่เยื่องไปข้างหน้าตัวหลัง
                     } else {
                         return false;
                     }
                 } else if (leading_coefficient(matrix, i - 1) != -1 && row_is_zero(matrix, i)) {
-                }//matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
+                } // matrix ตัวก่อนหน้าต้องมี ตัวนำ 1 และ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
                 else if (row_is_zero(matrix, i - 1) && row_is_zero(matrix, i)) {
-                }///matrix ตัวก่อนหน้าต้องป็น 0 ทั้งแถวและ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
+                } /// matrix ตัวก่อนหน้าต้องป็น 0 ทั้งแถวและ ตัวปัจจุบันต้องเป็น 0 ทั้งแถว
                 else {
                     return false;
                 }
@@ -572,15 +568,15 @@ class matrix_operation implements matrix_operation_template {
         return true;
     }
 
-    public boolean check_reduce_row_echelon_matrix(float[][] matrix) {//เช็คว่าเป็น reduce row echelon matrix เปล่า
-        if (check_row_echelon_matrix(matrix)) {//เช็คว่าเป็น rem เปล่าถ้าไม่เป็นก็ไม่มีทางเป็น rrem ได้
+    public boolean check_reduce_row_echelon_matrix(float[][] matrix) {// เช็คว่าเป็น reduce row echelon matrix เปล่า
+        if (check_row_echelon_matrix(matrix)) {// เช็คว่าเป็น rem เปล่าถ้าไม่เป็นก็ไม่มีทางเป็น rrem ได้
             for (int i = 1; i <= rows; i++) {
-                if (leading_coefficient(matrix, i) != -1) {//เลือกม่าเฉพาะแถวที่มีตัวนำ 1
+                if (leading_coefficient(matrix, i) != -1) {// เลือกม่าเฉพาะแถวที่มีตัวนำ 1
                     for (int l = 1; l <= rows; l++) {
                         if (matrix[l - 1][leading_coefficient(matrix, i) - 1] == 0) {
-                        }//ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น ทั้งข้างบนข้างล่าง
+                        } // ในหลักของตัวนำ 1 ตัวที่ไม่ใช่ตัวนำ 1 ต้องเป็น 0 เท่านั้น ทั้งข้างบนข้างล่าง
                         else if (l == i) {
-                        }//กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
+                        } // กัน for loop แล้วเจอตัวนำ 1 เพราะตัวนำ 1 ไม่ใช่ 0
                         else {
                             return false;
                         }
@@ -605,7 +601,7 @@ class matrix_operation implements matrix_operation_template {
         }
     }
 
-    private void adding_row_by_row(float[][] matrix, int row_1, int row_2, float constant) {//row_1 คือตัวตั้ง row_2 คือตัวบวก
+    private void adding_row_by_row(float[][] matrix, int row_1, int row_2, float constant) {// row_1 คือตัวตั้ง row_2 คือตัวบวก
         if (constant == 0) {
             return;
         } else {
@@ -615,7 +611,7 @@ class matrix_operation implements matrix_operation_template {
         }
     }
 
-    private void switching_two_rows(float[][] matrix, int row_1, int row_2) {//สลับแถว
+    private void switching_two_rows(float[][] matrix, int row_1, int row_2) {// สลับแถว
         for (int i = 0; i < columns; i++) {
             float tmp = matrix[row_1 - 1][i];
             matrix[row_1 - 1][i] = matrix[row_2 - 1][i];
@@ -623,7 +619,7 @@ class matrix_operation implements matrix_operation_template {
         }
     }
 
-    private JPanel matrix_to_Jpanel(float[][] matrix) {//เปลี่ยน matrix เป็น JPanel
+    private JPanel matrix_to_Jpanel(float[][] matrix) {// เปลี่ยน matrix เป็น JPanel
         JPanel main_panel = new JPanel();
         JPanel matrix_panel = new JPanel();
 
@@ -636,13 +632,11 @@ class matrix_operation implements matrix_operation_template {
         for (int i = 0; i < rows; i++) {
             for (int l = 0; l < columns; l++) {
                 matrix_Jlabel[i][l] = new JLabel();
-                if(Math.round(matrix[i][l])==matrix[i][l])
-                //if(matrix[i][l]-(int)matrix[i][l] == 0 )
-                    {matrix_Jlabel[i][l].setText(String.format("%.0f",(matrix[i][l]))+"   ");}
-                else
-                    {//matrix_Jlabel[i][l].setText(String.format("%f",(matrix[i][l]))+"   ");
-                    matrix_Jlabel[i][l].setText(matrix[i][l]+"   ");
-                    }
+                if (Math.round(matrix[i][l]) == matrix[i][l]) {
+                    matrix_Jlabel[i][l].setText(String.format("%.0f", (matrix[i][l])) + "   ");
+                } else {
+                    matrix_Jlabel[i][l].setText(matrix[i][l] + "   ");
+                }
                 matrix_Jlabel[i][l].setFont(new java.awt.Font("Tahoma", 1, 13));
                 matrix_Jlabel[i][l].setForeground(new Color(255, 255, 255));
                 c.gridx = l;
@@ -656,24 +650,24 @@ class matrix_operation implements matrix_operation_template {
     }
 
     private JLabel set_text_to_JLabel(String tmp) {
-        JLabel text_Label = new JLabel("",SwingConstants.CENTER);
+        JLabel text_Label = new JLabel("", SwingConstants.CENTER);
         text_Label.setOpaque(false);
         text_Label.setText(tmp);
-        text_Label.setPreferredSize(new Dimension(500, 20));
         text_Label.setForeground(new Color(255, 255, 255));
         text_Label.setFont(new java.awt.Font("Tahoma", 1, 13));
-        if(tmp==" "){
+        if (tmp == " ") {
+            text_Label.setPreferredSize(new Dimension(500, 5));
             text_Label.setOpaque(true);
             text_Label.setBackground(new Color(255, 255, 255));
-        }
-        else{
+        } else {
+            text_Label.setPreferredSize(new Dimension(500, 20));
             text_Label.setOpaque(true);
             text_Label.setBackground(new Color(0, 102, 100));
         }
         return text_Label;
     }
 
-    public JPanel calulate_rrem_to_JPanel(float[][] matrix) {//คำนวณ rrem และแปลงเป็น JPanel
+    public JPanel calulate_rrem_to_JPanel(float[][] matrix) {// คำนวณ rrem และแปลงเป็น JPanel
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
 
@@ -681,15 +675,15 @@ class matrix_operation implements matrix_operation_template {
 
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
-        int leading_coefficient_position_in_row = 0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        int leading_coefficient_position_in_row = 0;// คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
         String tmp = "";
         int JPanel_sqsequence = 1;
         for (int i = 0; i < columns; i++) {
             for (int l = 0; l < rows; l++) {
-                if (leading_coefficient_position_in_row != -1) {//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+                if (leading_coefficient_position_in_row != -1) {// ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
                     if (matrix[leading_coefficient_position_in_row][i] == 1) {
-                        if (leading_coefficient_position_in_row != l && matrix[l][i] != 0) {//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
-                            tmp = "R" + (l + 1) + "+(" + (-matrix[l][i]) + ")R" + (leading_coefficient_position_in_row + 1) + "\n\n";
+                        if (leading_coefficient_position_in_row != l && matrix[l][i] != 0) {// ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
+                            tmp = "R" + (l + 1) + "+(" + (-matrix[l][i]) + ")R"+ (leading_coefficient_position_in_row + 1) + "\n\n";
                             c.gridy = JPanel_sqsequence;
                             adding_row_by_row(matrix, l + 1, leading_coefficient_position_in_row + 1, -matrix[l][i]);
                             panel.add(matrix_to_Jpanel(matrix), c);
@@ -698,14 +692,14 @@ class matrix_operation implements matrix_operation_template {
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(tmp), c);
                             JPanel_sqsequence++;
-                            //////////////////////////////สร้างเว้นวรรคด้วย JLabel
+                            ////////////////////////////// สร้างเว้นวรรคด้วย JLabel
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(" "), c);
                             JPanel_sqsequence++;
                             /////////////////////////////////
                         }
-                    } else if (matrix[l][i] != 0 && leading_coefficient_position_in_row <= l) {//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
-                        if (l != leading_coefficient_position_in_row) {//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
+                    } else if (matrix[l][i] != 0 && leading_coefficient_position_in_row <= l) {// ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
+                        if (l != leading_coefficient_position_in_row) {// อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
                             tmp = "R" + (l + 1) + "↔R" + (leading_coefficient_position_in_row + 1) + "\n\n";
                             c.gridy = JPanel_sqsequence;
                             switching_two_rows(matrix, l + 1, leading_coefficient_position_in_row + 1);
@@ -715,37 +709,37 @@ class matrix_operation implements matrix_operation_template {
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(tmp), c);
                             JPanel_sqsequence++;
-                            //////////////////////////////สร้างเว้นวรรคด้วย JLabel
+                            ////////////////////////////// สร้างเว้นวรรคด้วย JLabel
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(" "), c);
                             JPanel_sqsequence++;
                             /////////////////////////////////
                         }
-                        if (matrix[leading_coefficient_position_in_row][i] != 1) {//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
-                            tmp = "R" + (leading_coefficient_position_in_row + 1) + "/" + matrix[leading_coefficient_position_in_row][i] + "\n\n";
+                        if (matrix[leading_coefficient_position_in_row][i] != 1) {// เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            tmp = "R" + (leading_coefficient_position_in_row + 1) + "/"+ matrix[leading_coefficient_position_in_row][i] + "\n\n";
                             c.gridy = JPanel_sqsequence;
-                            multiplying_row_by_constant(matrix, leading_coefficient_position_in_row + 1, 1 / matrix[leading_coefficient_position_in_row][i]);
+                            multiplying_row_by_constant(matrix, leading_coefficient_position_in_row + 1,1 / matrix[leading_coefficient_position_in_row][i]);
                             panel.add(matrix_to_Jpanel(matrix), c);
                             JPanel_sqsequence++;
 
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(tmp), c);
                             JPanel_sqsequence++;
-                            //////////////////////////////สร้างเว้นวรรคด้วย JLabel
+                            ////////////////////////////// สร้างเว้นวรรคด้วย JLabel
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(" "), c);
                             JPanel_sqsequence++;
                             /////////////////////////////////
                         }
-                        l = -1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
+                        l = -1;// ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
                     }
                 }
             }
             if (leading_coefficient_position_in_row == -1) {
-            }//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+            } // ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
             else if (matrix[leading_coefficient_position_in_row][i] == 1) {
                 leading_coefficient_position_in_row++;
-                if (leading_coefficient_position_in_row == rows) {//ถ้า leading_coefficient_position_in_row มีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะ เพื่อจะไม่ต้องทำต่อ
+                if (leading_coefficient_position_in_row == rows) {// ถ้า leading_coefficient_position_in_rowมีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะเพื่อจะไม่ต้องทำต่อ
                     leading_coefficient_position_in_row = -1;
                 }
             }
@@ -761,7 +755,7 @@ class matrix_operation implements matrix_operation_template {
         return panel;
     }
 
-    public JPanel calulate_rem_to_JPanel(float[][] matrix) {//คำนวณ rem และแปลงเป็น JPanel
+    public JPanel calulate_rem_to_JPanel(float[][] matrix) {// คำนวณ rem และแปลงเป็น JPanel
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
 
@@ -769,15 +763,15 @@ class matrix_operation implements matrix_operation_template {
 
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
-        int leading_coefficient_position_in_row = 0;//คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
+        int leading_coefficient_position_in_row = 0;// คือ ค่าของแถวของตัวนำ 1 ที่คาดหวัง ใช้หาว่าตัวนำต้องอยู่ในแถวไหน
         String tmp = "";
         int JPanel_sqsequence = 1;
         for (int i = 0; i < columns; i++) {
             for (int l = 0; l < rows; l++) {
-                if (leading_coefficient_position_in_row != -1) {//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+                if (leading_coefficient_position_in_row != -1) {// ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
                     if (matrix[leading_coefficient_position_in_row][i] == 1) {
-                        if (leading_coefficient_position_in_row != l && matrix[l][i] != 0 && leading_coefficient_position_in_row < l) {//ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
-                            tmp = "R" + (l + 1) + "+(" + (-matrix[l][i]) + ")R" + (leading_coefficient_position_in_row + 1) + "\n\n";
+                        if (leading_coefficient_position_in_row != l && matrix[l][i] != 0 && leading_coefficient_position_in_row < l) {// ถ้าในหลักนั้นมีตัวนำ 1 ให้เปลี่ยนตัวที่เหลือในหลักนั้นเป็น 0
+                            tmp = "R" + (l + 1) + "+(" + (-matrix[l][i]) + ")R"+ (leading_coefficient_position_in_row + 1) + "\n\n";
 
                             c.gridy = JPanel_sqsequence;
                             adding_row_by_row(matrix, l + 1, leading_coefficient_position_in_row + 1, -matrix[l][i]);
@@ -787,14 +781,14 @@ class matrix_operation implements matrix_operation_template {
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(tmp), c);
                             JPanel_sqsequence++;
-                            //////////////////////////////สร้างเว้นวรรคด้วย JLabel
+                            ////////////////////////////// สร้างเว้นวรรคด้วย JLabel
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(" "), c);
                             JPanel_sqsequence++;
                             /////////////////////////////////
                         }
-                    } else if (matrix[l][i] != 0 && leading_coefficient_position_in_row <= l) {//ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
-                        if (l != leading_coefficient_position_in_row) {//อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
+                    } else if (matrix[l][i] != 0 && leading_coefficient_position_in_row <= l) {// ใช้หาตัวนำ 1 โดยต้องอยู่ในแถวที่น้อยกว่าหรือเท่ากับตำนำ1ที่คาดหวัง
+                        if (l != leading_coefficient_position_in_row) {// อย่างแรกสลับแถวปัจจุบันไปแถวที่ควรมีตัวนำ 1
                             tmp = "R" + (l + 1) + "↔R" + (leading_coefficient_position_in_row + 1) + "\n\n";
                             c.gridy = JPanel_sqsequence;
                             switching_two_rows(matrix, l + 1, leading_coefficient_position_in_row + 1);
@@ -804,37 +798,37 @@ class matrix_operation implements matrix_operation_template {
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(tmp), c);
                             JPanel_sqsequence++;
-                            //////////////////////////////สร้างเว้นวรรคด้วย JLabel
+                            ////////////////////////////// สร้างเว้นวรรคด้วย JLabel
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(" "), c);
                             JPanel_sqsequence++;
                             /////////////////////////////////
                         }
-                        if (matrix[leading_coefficient_position_in_row][i] != 1) {//เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
-                            tmp = "R" + (leading_coefficient_position_in_row + 1) + "/" + matrix[leading_coefficient_position_in_row][i] + "\n\n";
+                        if (matrix[leading_coefficient_position_in_row][i] != 1) {// เปลี่ยนช่องที่อยู่ให้กลายเป็น 1 โดยการหารตัวมันเองทั้งแถว
+                            tmp = "R" + (leading_coefficient_position_in_row + 1) + "/"+ matrix[leading_coefficient_position_in_row][i] + "\n\n";
                             c.gridy = JPanel_sqsequence;
-                            multiplying_row_by_constant(matrix, leading_coefficient_position_in_row + 1, 1 / matrix[leading_coefficient_position_in_row][i]);
+                            multiplying_row_by_constant(matrix, leading_coefficient_position_in_row + 1,1 / matrix[leading_coefficient_position_in_row][i]);
                             panel.add(matrix_to_Jpanel(matrix), c);
                             JPanel_sqsequence++;
 
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(tmp), c);
                             JPanel_sqsequence++;
-                            //////////////////////////////สร้างเว้นวรรคด้วย JLabel
+                            ////////////////////////////// สร้างเว้นวรรคด้วย JLabel
                             c.gridy = JPanel_sqsequence;
                             panel.add(set_text_to_JLabel(" "), c);
                             JPanel_sqsequence++;
                             /////////////////////////////////
                         }
-                        l = -1;//ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
+                        l = -1;// ต้องเป็น -1 เพราะว่า อยากให้ l=0 เพื่อที่มันจะได้วน loop แต่พอจบ if มันจะ +1 เลยตัองเป็น -1
                     }
                 }
             }
             if (leading_coefficient_position_in_row == -1) {
-            }//ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
+            } // ใช้กันไม่ให้เกิดเหตุการณ์ leading_coefficient_position_in_row มีค่ามากกว่าจำนวนแถวสูงสุด
             else if (matrix[leading_coefficient_position_in_row][i] == 1) {
                 leading_coefficient_position_in_row++;
-                if (leading_coefficient_position_in_row == rows) {//ถ้า leading_coefficient_position_in_row มีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะ เพื่อจะไม่ต้องทำต่อ
+                if (leading_coefficient_position_in_row == rows) {// ถ้า leading_coefficient_position_in_row มีค่าเท่ากับจำนวนแถวสูงสุดแล้วปรับให้เป็น -1 ซะเพื่อจะไม่ต้องทำต่อ
                     leading_coefficient_position_in_row = -1;
                 }
             }
