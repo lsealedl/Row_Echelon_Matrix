@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicArrowButton;
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
@@ -49,6 +51,7 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
 
     private int frame_width;
 
+    
     gui(int row, int column) {
         this.row = row;
         this.column = column;
@@ -66,16 +69,28 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
         calculate_rrem_Button = new javax.swing.JButton("calculate RREM");
         /////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม ,
         /////////////////////////////////////////////// กำหนดตัวอักษร
-        ImageIcon img = new ImageIcon(getClass().getResource("KU_Logo_PNG.png"));
+        ImageIcon img = new ImageIcon(getClass().getResource("image\\KU_Logo_PNG.png"));
         frame.setIconImage(img.getImage());
 
-        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("u.png")));
+        RowSizeUpJButton.setOpaque(false);
+        RowSizeUpJButton.setContentAreaFilled(false);
+        RowSizeUpJButton.setBorderPainted(false);
+        RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_up.png")));
         RowSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("d.png")));
+        RowSizeDownJButton.setOpaque(false);
+        RowSizeDownJButton.setContentAreaFilled(false);
+        RowSizeDownJButton.setBorderPainted(false);
+        RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_down.png")));
         RowSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("r.png")));
+        ColumnSizeUpJButton.setOpaque(false);
+        ColumnSizeUpJButton.setContentAreaFilled(false);
+        ColumnSizeUpJButton.setBorderPainted(false);
+        ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_right.png")));
         ColumnSizeUpJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("l.png")));
+        ColumnSizeDownJButton.setOpaque(false);
+        ColumnSizeDownJButton.setContentAreaFilled(false);
+        ColumnSizeDownJButton.setBorderPainted(false);
+        ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_left.png")));
         ColumnSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         rem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
@@ -201,7 +216,12 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
         ColumnSizeDownJButton.addActionListener(this);
         calculate_rem_Button.addActionListener(this);
         calculate_rrem_Button.addActionListener(this);
-
+        
+        RowSizeUpJButton.addMouseListener(this);
+        RowSizeDownJButton.addMouseListener(this);
+        ColumnSizeUpJButton.addMouseListener(this);
+        ColumnSizeDownJButton.addMouseListener(this);
+        
         fill_zero_Button.addMouseListener(this);
         reset_Button.addMouseListener(this);
         rem_Button.addMouseListener(this);
@@ -258,12 +278,41 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
 
     @Override
     public void mouseExited(MouseEvent e) {
-        e.getComponent().setBackground(JlabelColor);
+        if(e.getSource()==RowSizeUpJButton){
+            RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_up.png")));
+            }
+        else if(e.getSource()==RowSizeDownJButton){
+            RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_down.png")));
+        }
+        else if(e.getSource()==ColumnSizeUpJButton){
+            ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_right.png")));
+        }
+        else if(e.getSource()==ColumnSizeDownJButton){
+            ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_left.png")));
+        }
+        else{
+            e.getComponent().setBackground(JlabelColor);
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        e.getComponent().setBackground(JlabelColor2);
+        if(e.getSource()==RowSizeUpJButton){
+            RowSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_up_2.png")));
+            }
+        else if(e.getSource()==RowSizeDownJButton){
+            RowSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_down_2.png")));
+        }
+        else if(e.getSource()==ColumnSizeUpJButton){
+            ColumnSizeUpJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_right_2.png")));
+        }
+        else if(e.getSource()==ColumnSizeDownJButton){
+            ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_left_2.png")));
+        }
+        else{
+            e.getComponent().setBackground(JlabelColor2);
+        }
+        
     }
 
     @Override
@@ -304,8 +353,7 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
         frame.pack();
 
         Point frame_location = frame.getLocation();
-        frame.setLocation((int) frame_location.getX() - (frame.getWidth() - frame_width) / 2,
-                (int) frame_location.getY());
+        frame.setLocation((int) frame_location.getX() - (frame.getWidth() - frame_width) / 2,(int) frame_location.getY());
 
         frame_width = frame.getWidth();
     }
@@ -426,7 +474,7 @@ class calculate_gui extends javax.swing.JFrame {
     private Container container = frame.getContentPane();
 
     calculate_gui(int rows, int columns, float[][] matrix, String choice) {
-        ImageIcon img = new ImageIcon(getClass().getResource("KU_Logo_PNG.png"));
+        ImageIcon img = new ImageIcon(getClass().getResource("image\\KU_Logo_PNG.png"));
         frame.setIconImage(img.getImage());
         matrix_operation m_o = new matrix_operation(rows, columns);
         container.setLayout(new BorderLayout());
