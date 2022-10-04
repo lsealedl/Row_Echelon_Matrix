@@ -220,7 +220,8 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
         ColumnSizeDownJButton.addActionListener(this);
         calculate_rem_Button.addActionListener(this);
         calculate_rrem_Button.addActionListener(this);
-        
+        enter_matrix_size_JButton.addActionListener(this);
+
         RowSizeUpJButton.addMouseListener(this);
         RowSizeDownJButton.addMouseListener(this);
         ColumnSizeUpJButton.addMouseListener(this);
