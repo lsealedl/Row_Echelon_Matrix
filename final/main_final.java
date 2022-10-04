@@ -46,8 +46,13 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
 
     GridBagConstraints c = new GridBagConstraints();
 
-    private Color JlabelColor = new Color(179, 188, 24);
-    private Color JlabelColor2 = new Color(0, 102, 100);
+    //private Color JlabelColor = new Color(179, 188, 24);
+    //private Color JlabelColor2 = new Color(0, 102, 100);
+
+    private Color JlabelColor = new Color(0, 102, 100);
+    private Color JlabelColor2 = new Color(179, 188, 24);
+
+    private Color backgrondColor = new Color(255, 255, 255);  
 
     private int frame_width;
 
@@ -224,7 +229,6 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         calculate_rem_Button.setForeground(FontColor);
         calculate_rrem_Button.setForeground(FontColor);
 
-        Color JlabelColor = new Color(179, 188, 24);
         enter_matrix_size_JButton.setBackground(JlabelColor);
         fill_zero_Button.setBackground(JlabelColor);
         reset_Button.setBackground(JlabelColor);
@@ -237,8 +241,7 @@ class gui extends javax.swing.JFrame  implements ActionListener,MouseListener{ /
         calculate_rem_Button.setBackground(JlabelColor);
         calculate_rrem_Button.setBackground(JlabelColor);
 
-        Color c1 = new Color(66, 66, 66);  
-        container.setBackground(c1);//เปลี่ยนพื้นหลัง
+        container.setBackground(backgrondColor);//เปลี่ยนพื้นหลัง
 
 
         frame.pack();
@@ -430,24 +433,27 @@ class calculate_gui extends javax.swing.JFrame {
         matrix_operation m_o = new matrix_operation(rows, columns);
         container.setLayout(new BorderLayout());
         JPanel calculate_panel = new JPanel();
+        calculate_panel.setLayout(new BorderLayout());
         JPanel subPanel = new JPanel();
 
         subPanel.setLayout(new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
 
-        JLabel titleLabel = new JLabel();
+        JLabel titleLabel = new JLabel("",SwingConstants.CENTER);
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 1, 13));
+        titleLabel.setForeground(new Color(255, 255, 255));
+
         if (choice.equals("rem")) {
             titleLabel.setText("Calculate Row Echelon Matrix");
             c.gridx = 0;
-            c.gridy = 0;
+            c.gridy = 0;          
             subPanel.add(titleLabel, c);
             c.gridx = 0;
             c.gridy = 1;
             subPanel.add(m_o.calulate_rem_to_JPanel(matrix), c);
-            calculate_panel.add(subPanel, BorderLayout.CENTER);
+            calculate_panel.add(subPanel, BorderLayout.NORTH);
         } else if (choice.equals("rrem")) {
             titleLabel.setText("Calculate Reduced Row Echelon Matrix");
             c.gridx = 0;
@@ -456,25 +462,32 @@ class calculate_gui extends javax.swing.JFrame {
             c.gridx = 0;
             c.gridy = 1;
             subPanel.add(m_o.calulate_rrem_to_JPanel(matrix), c);
-            calculate_panel.add(subPanel, BorderLayout.CENTER);
+            calculate_panel.add(subPanel, BorderLayout.NORTH);
         }
         JScrollPane ScrollPane = new JScrollPane(calculate_panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        ScrollPane.setBorder(BorderFactory.createEmptyBorder());
         container.add(ScrollPane, BorderLayout.CENTER);
 
-        titleLabel.setOpaque(false);
         subPanel.setOpaque(false);
         calculate_panel.setOpaque(false);
         ScrollPane.setOpaque(false);
         ScrollPane.getViewport().setOpaque(false);
+        titleLabel.setOpaque(true);
 
-        container.setBackground(Color.YELLOW);//เปลี่ยนพื้นหลัง
-        
+        titleLabel.setBackground(new Color(0, 0, 0));
+        container.setBackground(new Color(179, 188, 24));//เปลี่ยนพื้นหลัง
+        titleLabel.setPreferredSize(new Dimension(500, 20));
+
         //frame.pack();
         frame.setSize(500, 550);
+        frame.setResizable(false);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
+
+        //titleLabel.setPreferredSize(new Dimension(10000, titleLabel.getHeight()));
+        //titleLabel.setPreferredSize(frame.getSize());
     }
 }
 
@@ -613,7 +626,7 @@ class matrix_operation implements matrix_operation_template {
         JPanel main_panel = new JPanel();
         JPanel matrix_panel = new JPanel();
 
-        main_panel.setOpaque(false);
+        main_panel.setOpaque(true);
         matrix_panel.setOpaque(false);
 
         JLabel[][] matrix_Jlabel = new JLabel[rows][columns];
@@ -630,20 +643,32 @@ class matrix_operation implements matrix_operation_template {
                     matrix_Jlabel[i][l].setText(matrix[i][l]+"   ");
                     }
                 matrix_Jlabel[i][l].setFont(new java.awt.Font("Tahoma", 1, 13));
+                matrix_Jlabel[i][l].setForeground(new Color(255, 255, 255));
                 c.gridx = l;
                 c.gridy = i;
                 matrix_panel.add(matrix_Jlabel[i][l], c);
             }
         }
+        main_panel.setBackground(new Color(179, 188, 24));
         main_panel.add(matrix_panel);
         return main_panel;
     }
 
     private JLabel set_text_to_JLabel(String tmp) {
-        JLabel text_Label = new JLabel();
+        JLabel text_Label = new JLabel("",SwingConstants.CENTER);
         text_Label.setOpaque(false);
         text_Label.setText(tmp);
+        text_Label.setPreferredSize(new Dimension(500, 20));
+        text_Label.setForeground(new Color(255, 255, 255));
         text_Label.setFont(new java.awt.Font("Tahoma", 1, 13));
+        if(tmp==" "){
+            text_Label.setOpaque(true);
+            text_Label.setBackground(new Color(255, 255, 255));
+        }
+        else{
+            text_Label.setOpaque(true);
+            text_Label.setBackground(new Color(0, 102, 100));
+        }
         return text_Label;
     }
 
