@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicArrowButton;
-
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
@@ -67,8 +65,7 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
         fill_zero_Button = new javax.swing.JButton("fill empty matix with 0");
         calculate_rem_Button = new javax.swing.JButton("calculate REM");
         calculate_rrem_Button = new javax.swing.JButton("calculate RREM");
-        /////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม ,
-        /////////////////////////////////////////////// กำหนดตัวอักษร
+        /////////////////////////////////////////////// set รูป/ลักษณะปุ่มให้ปุ่ม ,กำหนดตัวอักษร
         ImageIcon img = new ImageIcon(getClass().getResource("image\\KU_Logo_PNG.png"));
         frame.setIconImage(img.getImage());
 
@@ -93,12 +90,19 @@ class gui extends javax.swing.JFrame implements ActionListener, MouseListener { 
         ColumnSizeDownJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("image\\triangle_left.png")));
         ColumnSizeDownJButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        rem_Button.setBorderPainted(false);
         rem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        rrem_Button.setBorderPainted(false);
         rrem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        reset_Button.setBorderPainted(false);
         reset_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        fill_zero_Button.setBorderPainted(false);
         fill_zero_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        calculate_rem_Button.setBorderPainted(false);
         calculate_rem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        calculate_rrem_Button.setBorderPainted(false);
         calculate_rrem_Button.setFont(new java.awt.Font("Tahoma", 1, 13));
+        enter_matrix_size_JButton.setBorderPainted(false);
 
         row_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
         column_sizeJTextField.setHorizontalAlignment(SwingConstants.CENTER);
